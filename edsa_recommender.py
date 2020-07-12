@@ -119,7 +119,7 @@ def main():
         st.subheader('Content-based filtering')
         st.markdown('<p>Content-based filtering approaches utilize a series of discrete, pre-tagged characteristics of an item in order to recommend additional items with similar properties. Current recommender systems typically combine one or more approaches into a hybrid system.</p>', unsafe_allow_html=True)
         st.markdown('<p>For more information about building data Apps Please go to :<a href="https://www.streamlit.io/">streamlit site</a></p>', unsafe_allow_html=True)	
-		st.markdown('<p> </p>', unsafe_allow_html=True)	
+        st.markdown('<p> </p>', unsafe_allow_html=True)	
 
 if __name__ == '__main__':
     main()

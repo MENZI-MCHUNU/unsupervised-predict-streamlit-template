@@ -111,7 +111,7 @@ def main():
         st.title("Insights on how people rate movies")
         st.subheader("Rating Data")
         if st.checkbox('Show Rating data'):
-            rating_m.head()
+            st.write(rating_m[['userId','movieId','rating']])
 
 
     # Building out the About Machine Learning App page

@@ -39,13 +39,13 @@ from recommenders.content_based import content_model
 
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
-
+rating_m = pd.read_csv('resources/data/ratings.csv')
 # App declaration
 def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","EDA","About Machine Learning App","Instruction of use"]
+    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","About Machine Learning App","Instruction of use"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -106,6 +106,15 @@ def main():
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
+    # Building out the EDA page
+    if page_selection == "Exploratory Data Analysis":
+        st.title("Insights on how people rate movies")
+        st.subheader("Rating Data")
+        if st.checkbox('Show Rating data'):
+            rating_m.head()
+
+
+    # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")
         st.subheader('Machine Learning')

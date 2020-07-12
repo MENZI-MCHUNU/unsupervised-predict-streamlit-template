@@ -113,8 +113,8 @@ def main():
         if st.checkbox('Show Rating data'):
             st.write(rating_m[['userId','movieId','rating']])
         if st.checkbox('Show Rating bar graph'):    
-            num_users = len(df_ratings.userId.unique())
-            num_items = len(df_ratings.movieId.unique())
+            num_users = len(rating_m.userId.unique())
+            num_items = len(rating_m.movieId.unique())
             st.markdown('There are {} unique users and {} unique movies in this data set'.format(num_users, num_items))
             # get count
             df_ratings_cnt_tmp = pd.DataFrame(rating_m[['userId','movieId','rating']].groupby('rating').size(), columns=['count'])           

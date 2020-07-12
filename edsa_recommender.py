@@ -112,8 +112,34 @@ def main():
         st.subheader("Rating Data")
         if st.checkbox('Show Rating data'):
             st.write(rating_m[['userId','movieId','rating']])
-
-
+        if st.checkbox('Show Rating bar graph'):    
+            num_users = len(df_ratings.userId.unique())
+            num_items = len(df_ratings.movieId.unique())
+            st.markdown('There are {} unique users and {} unique movies in this data set'.format(num_users, num_items))
+            # get count
+            df_ratings_cnt_tmp = pd.DataFrame(rating_m[['userId','movieId','rating']].groupby('rating').size(), columns=['count'])           
+            # there are a lot more counts in rating of zero
+            total_cnt = num_users * num_items
+            rating_zero_cnt = total_cnt - rating_m[['userId','movieId','rating']].shape[0]
+            # append counts of zero rating to df_ratings_cnt
+            df_ratings_cnt = df_ratings_cnt_tmp.append(
+                    pd.DataFrame({'count': rating_zero_cnt}, index=[0.0]),
+                    verify_integrity=True,
+            ).sort_index()            
+            # add log count
+            df_ratings_cnt['log_count'] = np.log(df_ratings_cnt['count'])
+ 
+            ax = df_ratings_cnt[['count']].reset_index().rename(columns={'index': 'rating score'}).plot(
+                        x='rating score',
+                        y='count',
+                        kind='bar',
+                        figsize=(12, 8),
+                        title='Count for Each Rating Score (in Log Scale)',
+                        logy=True,
+                        fontsize=12,
+            )
+            ax.set_xlabel("movie rating score")
+            ax.set_ylabel("number of ratings")           
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

@@ -139,7 +139,8 @@ def main():
                         fontsize=12,
             )
             ax.set_xlabel("movie rating score")
-            ax.set_ylabel("number of ratings")           
+            ax.set_ylabel("number of ratings") 
+            st.pyplot()          
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

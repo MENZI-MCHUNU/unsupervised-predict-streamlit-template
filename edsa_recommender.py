@@ -44,6 +44,7 @@ from recommenders.content_based import content_model
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
 rating_m = pd.read_csv('resources/data/ratings.csv')
+imdb = pd.read_csv('unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 # App declaration
 def main():
 
@@ -180,7 +181,10 @@ def main():
                     shadow=True, startangle=270)
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
             plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
-            st.pyplot()                                             
+            st.pyplot()
+                    
+            if st.checkbox('Show imdb data'):
+                st.write(imdb)                                             
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

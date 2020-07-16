@@ -249,6 +249,7 @@ def main():
  
             #here we  make census of the genres:
             genre_labels = set()
+            title_list["genres"] = title_list["genres"].astype('str')
             title_list["genres"] = title_list["genres"].apply(lambda x: x.replace('|',' '))
             for s in title_list['genres']:
                 genre_labels = genre_labels.union(set(s))  

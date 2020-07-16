@@ -182,9 +182,30 @@ def main():
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
             plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
-                    
-            if st.checkbox('Show imdb data'):
-                st.write(imdb)                                             
+                      
+        if st.checkbox('Show WordCloud'):   
+            imdb["title_cast"] = imdb["title_cast"].astype('str')
+            imdb["director"] = imdb["director"].astype('str')
+            imdb["plot_keywords"] = imdb["plot_keywords"].astype('str')
+            imdb["plot_keywords"] = imdb["plot_keywords"].apply(lambda x: x.replace('|',' '))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace(' ',''))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace('|',' '))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace(' ',''))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace('Seefullsummary',''))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace('nan',''))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace('nan',''))
+            imdb["plot_keywords"] = imdb["plot_keywords"].apply(lambda x: x.replace('nan',''))  
+
+            directors = ' '.join([text for text in imdb["director"]])
+
+            # Word cloud for the overall data checking out which words do people use more often
+            wordcloud = WordCloud(width=800, height=500,random_state=21,max_font_size=110).generate(directors)
+
+            #ploting the word cloud
+            plt.figure(figsize=(16,8))
+            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.axis('off')
+            st.pyplot()                                                                 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

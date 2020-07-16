@@ -117,6 +117,8 @@ def main():
         st.subheader("Rating Data")
         if st.checkbox('Show Rating data'):
             st.write(rating_m[['userId','movieId','rating']])
+        if st.checkbox('Show RatinMoviesg data'):
+            st.write(title_list)          
         if st.checkbox('Show Rating bar graph'):    
             num_users = len(rating_m.userId.unique())
             num_items = len(rating_m.movieId.unique())

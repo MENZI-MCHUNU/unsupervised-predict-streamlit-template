@@ -31,7 +31,11 @@ import streamlit as st
 # Data handling dependencies
 import pandas as pd
 import numpy as np
-
+# To create plots
+import matplotlib.pyplot as plt # data visualization library
+import seaborn as sns
+sns.set_style('whitegrid')
+from wordcloud import WordCloud, STOPWORDS #used to generate world cloud
 # Custom Libraries
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
@@ -140,7 +144,43 @@ def main():
             )
             ax.set_xlabel("movie rating score")
             ax.set_ylabel("number of ratings") 
-            st.pyplot()          
+            st.pyplot()  
+        if st.checkbox('Show Rating bar graph'):
+            rating_m.groupby('rating')['userId'].count().plot(kind = 'bar', color = 'g',figsize = (8,7))
+            plt.xticks(rotation=85, fontsize = 14)
+            plt.yticks(fontsize = 14)
+            plt.xlabel('Ratings (scale: 0.5 - 5.0)', fontsize=16)
+            plt.ylabel('No. of Ratings', fontsize=16)
+            plt.title('Distribution of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
+            st.pyplot()
+        if st.checkbox('Show Pie chart for ratings'):
+            # Calculate and categorise ratings proportions
+            a = len(rating_m.loc[rating_m['rating']== 0.5]) / len(rating_m)
+            b = len(rating_m.loc[rating_m['rating']==1.0]) / len(rating_m)
+            c = len(rating_m.loc[rating_m['rating']==1.5]) / len(rating_m)
+            d = len(rating_m.loc[rating_m['rating']==2.0]) / len(rating_m)
+            low_ratings= a+b+c+d
+            e = len(rating_m.loc[rating_m['rating']==2.5]) / len(rating_m)
+            f = len(rating_m.loc[rating_m['rating']== 3.0]) / len(rating_m)
+            g = len(rating_m.loc[rating_m['rating']==3.5]) / len(rating_m)
+            medium_ratings= e+f+g
+            h = len(rating_m.loc[rating_m['rating']==4.0]) / len(rating_m)
+            i = len(rating_m.loc[rating_m['rating']==4.5]) / len(rating_m)
+            j = len(rating_m.loc[rating_m['rating']==5.0]) / len(rating_m)
+            high_ratings= h+i+j 
+            # To view proportions of ratings categories, it is best practice to use pie charts
+            # Where the slices will be ordered and plotted clockwise:
+            labels = 'Low Ratings (scale: 0.5 - 2.0)', 'Medium Ratings (scale: 2.5 - 3.5)', 'High Ratings (scale: 4.0 - 5.0)'
+            sizes = [low_ratings, medium_ratings,  high_ratings]
+            explode = (0, 0, 0.1)  # Only "explore" the 3rd slice (i.e. 'Anti')
+
+            # Create pie chart with the above labels and calculated class proportions as inputs
+            fig1, ax1 = plt.subplots()
+            ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+                    shadow=True, startangle=270)
+            ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+            plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
+            st.pyplot()                                             
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

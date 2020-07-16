@@ -249,7 +249,8 @@ def main():
  
             #here we  make census of the genres:
             genre_labels = set()
-            for s in title_list['genres'].split('|').values:
+            title_list["genres"] = title_list["genres"].apply(lambda x: x.replace('|',' '))
+            for s in title_list['genres']:
                 genre_labels = genre_labels.union(set(s))  
             #counting how many times each of genres occur:
             keyword_occurences, dum = count_word(title_list, 'genres', genre_labels)

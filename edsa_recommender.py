@@ -208,6 +208,18 @@ def main():
             st.pyplot() 
 
         if st.checkbox('Show WordCloud of Actors'):
+            imdb["title_cast"] = imdb["title_cast"].astype('str')
+            imdb["director"] = imdb["director"].astype('str')
+            imdb["plot_keywords"] = imdb["plot_keywords"].astype('str')
+            imdb["plot_keywords"] = imdb["plot_keywords"].apply(lambda x: x.replace('|',' '))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace(' ',''))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace('|',' '))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace(' ',''))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace('Seefullsummary',''))
+            imdb["director"] = imdb["director"].apply(lambda x: x.replace('nan',''))
+            imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace('nan',''))
+            imdb["plot_keywords"] = imdb["plot_keywords"].apply(lambda x: x.replace('nan',''))   
+                      
             title_cast= ' '.join([text for text in imdb["title_cast"]])
 
             # Word cloud for the overall data checking out which words do people use more often

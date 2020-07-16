@@ -219,7 +219,7 @@ def main():
             imdb["director"] = imdb["director"].apply(lambda x: x.replace('nan',''))
             imdb["title_cast"] = imdb["title_cast"].apply(lambda x: x.replace('nan',''))
             imdb["plot_keywords"] = imdb["plot_keywords"].apply(lambda x: x.replace('nan',''))   
-                      
+
             title_cast= ' '.join([text for text in imdb["title_cast"]])
 
             # Word cloud for the overall data checking out which words do people use more often
@@ -230,7 +230,53 @@ def main():
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
             st.pyplot()  
-                                                                                 
+
+        if st.checkbox('Show WordCloud of genres'):
+            #define a function that counts the number of times each genre appear:
+            def count_word(df, ref_col, lister):
+                keyword_count = dict()
+                for s in lister: keyword_count[s] = 0
+                for lister_keywords in df[ref_col].str.split('|'):
+                    if type(lister_keywords) == float and pd.isnull(lister_keywords): continue
+                    for s in lister_keywords: 
+                        if pd.notnull(s): keyword_count[s] += 1
+                # convert the dictionary in a list to sort the keywords  by frequency
+                keyword_occurences = []
+                for k,v in keyword_count.items():
+                    keyword_occurences.append([k,v])
+                keyword_occurences.sort(key = lambda x:x[1], reverse = True)
+            return keyword_occurences, keyword_count      
+ 
+            #here we  make census of the genres:
+            genre_labels = set()
+            for s in title_list['genres'].str.split('|').values:
+                genre_labels = genre_labels.union(set(s))  
+            #counting how many times each of genres occur:
+            keyword_occurences, dum = count_word(title_list, 'genres', genre_labels)
+            # Function that control the color of the words
+            def random_color_func(word=None, font_size=None, position=None,
+                      orientation=None, font_path=None, random_state=None):
+                h = int(360.0 * tone / 255.0)
+                s = int(100.0 * 255.0 / 255.0)
+                l = int(100.0 * float(random_state.randint(70, 120)) / 255.0)
+            return "hsl({}, {}%, {}%)".format(h, s, l)
+
+
+            #Finally, the result is shown as a wordcloud:
+            words = dict()
+            trunc_occurences = keyword_occurences[0:50]
+            for s in trunc_occurences:
+                words[s[0]] = s[1]
+            tone = 100 # define the color of the words
+            f, ax = plt.subplots(figsize=(14, 6))
+            wordcloud = WordCloud(width=550,height=300, background_color='white', 
+                                    max_words=1628,relative_scaling=0.7,
+                                    color_func = random_color_func,
+                                    normalize_plurals=False)
+            wordcloud.generate_from_frequencies(words)
+            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.axis('off')
+            st.pyplot()                                                                             
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

@@ -183,7 +183,7 @@ def main():
             plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
                       
-        if st.checkbox('Show WordCloud'):   
+        if st.checkbox('Show WordCloud of directors'):   
             imdb["title_cast"] = imdb["title_cast"].astype('str')
             imdb["director"] = imdb["director"].astype('str')
             imdb["plot_keywords"] = imdb["plot_keywords"].astype('str')
@@ -199,13 +199,26 @@ def main():
             directors = ' '.join([text for text in imdb["director"]])
 
             # Word cloud for the overall data checking out which words do people use more often
-            wordcloud = WordCloud(width=800, height=500,random_state=21,max_font_size=110).generate(directors)
+            wordcloud = WordCloud(width=900, height=600,random_state=21,max_font_size=110).generate(directors)
 
             #ploting the word cloud
             plt.figure(figsize=(16,8))
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
-            st.pyplot()                                                                 
+            st.pyplot() 
+
+        if st.checkbox('Show WordCloud of Actors'):
+            title_cast= ' '.join([text for text in imdb["title_cast"]])
+
+            # Word cloud for the overall data checking out which words do people use more often
+            wordcloud = WordCloud(width=900, height=600,random_state=21,max_font_size=110).generate(title_cast)
+
+            #ploting the word cloud
+            plt.figure(figsize=(16,8))
+            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.axis('off')
+            st.pyplot()  
+                                                                                 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

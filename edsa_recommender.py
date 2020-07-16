@@ -145,7 +145,7 @@ def main():
             ax.set_xlabel("movie rating score")
             ax.set_ylabel("number of ratings") 
             st.pyplot()  
-        if st.checkbox('Show Rating bar graph'):
+        if st.checkbox('Show Rating graph'):
             rating_m.groupby('rating')['userId'].count().plot(kind = 'bar', color = 'g',figsize = (8,7))
             plt.xticks(rotation=85, fontsize = 14)
             plt.yticks(fontsize = 14)

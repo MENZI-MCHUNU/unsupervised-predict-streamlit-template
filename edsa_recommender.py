@@ -245,7 +245,7 @@ def main():
                 for k,v in keyword_count.items():
                     keyword_occurences.append([k,v])
                 keyword_occurences.sort(key = lambda x:x[1], reverse = True)
-            return keyword_occurences, keyword_count      
+                return keyword_occurences, keyword_count      
  
             #here we  make census of the genres:
             genre_labels = set()

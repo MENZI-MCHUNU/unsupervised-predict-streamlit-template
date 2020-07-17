@@ -162,6 +162,9 @@ def main():
         movie_title = genres['genres'].unique()
         title = st.selectbox('Genre', movie_title)
         st.write(genres[genres['genres'] == title][:5])
+        if title == "Adventure":
+            st.video('http://youtube.com/watch?v=v-PjgYDrg70')
+
         #'## By year'
         #year = st.slider('Year', min_year, max_year)
         #df[df['Year'] == year]               

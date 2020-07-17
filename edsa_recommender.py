@@ -50,7 +50,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","About Machine Learning App","Instruction of use"]
+    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Search for a Movie","About Machine Learning App","Instruction of use"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -111,6 +111,27 @@ def main():
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
+    #Search for a Movie page
+    if page_selection  =="Search for a Movie":
+        st.title("Search for Movies")
+        @st.cache
+        def get_Movies():
+            return pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
+
+        # Movies
+        df = get_Movies()
+        #min_year = int(df['Year'].min())
+        #max_year = int(df['Year'].max())
+        #countries = df['Country Name'].unique()
+        #'## By country'
+        #country = st.selectbox('Country', countries)
+        #df[df['Country Name'] == country]
+        movie_title = df['title'].unique()
+        title = st.selectbox('title', movie_title)
+
+        #'## By year'
+        #year = st.slider('Year', min_year, max_year)
+        #df[df['Year'] == year]               
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")

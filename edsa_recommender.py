@@ -163,6 +163,7 @@ def main():
         title = st.selectbox('Genre', movie_title)
         st.write(genres[genres['genres'] == title][:5])
         if title == "Adventure":
+            st.subheader("Toy Story (1995)")
             st.video('http://youtube.com/watch?v=v-PjgYDrg70')
 
         #'## By year'

@@ -114,12 +114,9 @@ def main():
     #Search for a Movie page
     if page_selection  =="Search for a Movie":
         st.title("Search for Movies")
-        #@st.cache
-        def get_Movies():
-            return pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 
         # Movies
-        df = get_Movies()
+        df = pd.read_csv('resources/data/movies.csv')
         #min_year = int(df['Year'].min())
         #max_year = int(df['Year'].max())
         #countries = df['Country Name'].unique()

@@ -123,9 +123,13 @@ def main():
         #'## By country'
         #country = st.selectbox('Country', countries)
         #df[df['Country Name'] == country]
-        movie_title = df['title'].unique()
+        #movie_title = df['title'].unique()
+        #title = st.selectbox('title', movie_title)
+        movies1=df.copy()
+        movies1.genres = movies1.genres.str.split('|')
+        genres = explode(movies1, ['genres'])
+        movie_title = genres['genres'].unique()
         title = st.selectbox('title', movie_title)
-
         #'## By year'
         #year = st.slider('Year', min_year, max_year)
         #df[df['Year'] == year]               

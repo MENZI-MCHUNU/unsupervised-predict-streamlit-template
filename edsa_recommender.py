@@ -166,7 +166,18 @@ def main():
             st.subheader("Toy Story (1995)")
             st.video('http://youtube.com/watch?v=v-PjgYDrg70')
             st.markdown("Average Rating:")
-            
+            st.subheader("Jumanji (1995)")
+            st.video('https://www.youtube.com/watch?v=5p18zqZmeiI')
+            st.markdown("Average Rating:")    
+            st.subheader("Tom and Huck (1995)")
+            st.video('https://www.youtube.com/watch?v=_A3FhXhnmtA')
+            st.markdown("Average Rating:") 
+            st.subheader("GoldenEye (1995)")
+            st.video('https://www.youtube.com/watch?v=8Zw8ylP4buA')
+            st.markdown("Average Rating:")
+            st.subheader("Balto (1995)")
+            st.video('https://www.youtube.com/watch?v=HJwvbmRXym4')
+            st.markdown("Average Rating:")            
         #'## By year'
         #year = st.slider('Year', min_year, max_year)
         #df[df['Year'] == year]               

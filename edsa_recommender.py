@@ -165,7 +165,8 @@ def main():
         if title == "Adventure":
             st.subheader("Toy Story (1995)")
             st.video('http://youtube.com/watch?v=v-PjgYDrg70')
-
+            st.markdown("Average Rating:")
+            
         #'## By year'
         #year = st.slider('Year', min_year, max_year)
         #df[df['Year'] == year]               

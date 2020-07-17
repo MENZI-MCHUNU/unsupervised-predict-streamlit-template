@@ -160,7 +160,8 @@ def main():
         movies1.genres = movies1.genres.str.split('|')
         genres = explode(movies1, ['genres'])
         movie_title = genres['genres'].unique()
-        title = st.selectbox('title', movie_title)
+        title = st.selectbox('Genre', movie_title)
+        st.write(genres[genres['genres'] == title][:5])
         #'## By year'
         #year = st.slider('Year', min_year, max_year)
         #df[df['Year'] == year]               

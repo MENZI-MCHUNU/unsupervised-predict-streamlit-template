@@ -114,7 +114,7 @@ def main():
     #Search for a Movie page
     if page_selection  =="Search for a Movie":
         st.title("Search for Movies")
-        @st.cache
+        #@st.cache
         def get_Movies():
             return pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 

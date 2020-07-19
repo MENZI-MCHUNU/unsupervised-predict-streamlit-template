@@ -168,7 +168,7 @@ def main():
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        year_of_rating = movie_data['timestamp'].unique().sort_values(ascending=True)
+        year_of_rating = movie_data['timestamp'].sort_values(ascending=True).unique()
         rating_year = st.selectbox('Year', year_of_rating)
 
         movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.timestamp == rating_year)]

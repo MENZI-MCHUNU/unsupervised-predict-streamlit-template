@@ -169,17 +169,12 @@ def main():
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
         year_of_rating = movie_data['timestamp'].unique()
-        rating_year = st.selectbox('timestamp', year_of_rating)
-        #df[df['Year'] == year] 
+        rating_year = st.selectbox('Year', year_of_rating)
+
         movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.timestamp == rating_year)]
-        #movies[(movies.duration >= 200) & (movies.genre == 'Drama')]
+
         st.write(movie)        
-        #if title:    
-            #st.write(genres[genres['genres'] == title])
-                                           
-        #'## By year'
-        #year = st.slider('Year', min_year, max_year)
-        #df[df['Year'] == year]               
+             
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")

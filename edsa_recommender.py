@@ -166,7 +166,7 @@ def main():
         movie_rating = st.sidebar.number_input("Pick a rating ",0.5,5.0, step=0.5)
            
         movie_data = explode(movie_data, ['genres'])
-        movie_title = genres['genres'].unique()
+        movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
         movie = movie_data[(movie_dat.arating == movie_rating)&(movie_data.genres == title)]
         #movies[(movies.duration >= 200) & (movies.genre == 'Drama')]

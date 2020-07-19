@@ -164,12 +164,15 @@ def main():
         movie_data.genres = movie_data.genres.str.split('|')
         #movie_title = movie_data['rating'].unique()
         movie_rating = st.sidebar.number_input("Pick a rating ",0.5,5.0, step=0.5)
-        movie_data[movie_data['rating'] == movie_rating][:5]    
+           
         genres = explode(movie_data, ['genres'])
         movie_title = genres['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-
-        st.write(genres[genres['genres'] == title][:5])
+        movie = movie_data[movie_data['rating'] == movie_rating][:5] 
+        if movie:
+            st.write(movie)
+        if title:    
+            st.write(genres[genres['genres'] == title][:5])
                                            
         #'## By year'
         #year = st.slider('Year', min_year, max_year)

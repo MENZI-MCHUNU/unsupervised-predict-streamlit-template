@@ -168,9 +168,8 @@ def main():
         genres = explode(movie_data, ['genres'])
         movie_title = genres['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        movie = movie_data[movie_data['rating'] == movie_rating][:5] 
-        if movie:
-            st.write(movie)
+        movie = movie_data[movie_data['rating'] == movie_rating][:5]
+        st.write(movie)
         if title:    
             st.write(genres[genres['genres'] == title][:5])
                                            

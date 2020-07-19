@@ -172,8 +172,11 @@ def main():
         rating_year = st.selectbox('Year', year_of_rating)
 
         movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.timestamp == rating_year)]
-
-        st.write(movie)        
+        if len(movie) !=0:
+            st.write(movie)
+        if len(movie) ==0:
+        #len(df1.index)
+            st.write('We have no movies for that rating!')        
              
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":

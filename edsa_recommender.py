@@ -125,6 +125,7 @@ def main():
         #df[df['Country Name'] == country]
         #movie_title = df['title'].unique()
         #title = st.selectbox('title', movie_title)
+        st.sidebar.number_input("Which rating of a movie do you want ? ",0.5,5.0, step=0.5)
         def explode(df, lst_cols, fill_value='', preserve_index=False):
             import numpy as np
              # make sure `lst_cols` is list-alike

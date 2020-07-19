@@ -40,7 +40,7 @@ from wordcloud import WordCloud, STOPWORDS #used to generate world cloud
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
-
+import time
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
 rating_m = pd.read_csv('resources/data/ratings.csv')

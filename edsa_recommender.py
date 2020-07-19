@@ -159,8 +159,8 @@ def main():
             return res  
 
         movie_data = pd.merge(rating_m, df, on='movieId')
-        movie_data['timestamp'] = movie_data['timestamp'].apply(lambda x: time.strftime('%Y', time.localtime(x)))
-        movie_year = st.sidebar.slider("Pick the Year",1995,2019)
+        movie_data['Year'] = movie_data['timestamp'].apply(lambda x: time.strftime('%Y', time.localtime(x)))
+        #movie_year = st.sidebar.slider("Pick the Year",1995,2019)
         movie_data.genres = movie_data.genres.str.split('|')
         #movie_title = movie_data['rating'].unique()
         movie_rating = st.sidebar.number_input("Pick a rating ",0.5,5.0, step=0.5)
@@ -168,7 +168,11 @@ def main():
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)]
+        min_year = int(movie_data['Year'].min())
+        max_year = int(movie_data['Year'].max())
+        year = st.slider('Year', min_year, max_year)
+        #df[df['Year'] == year] 
+        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.Year == year)]
         #movies[(movies.duration >= 200) & (movies.genre == 'Drama')]
         st.write(movie)        
         #if title:    

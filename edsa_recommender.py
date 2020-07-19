@@ -168,11 +168,9 @@ def main():
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        min_year = int(movie_data['Year'].min())
-        max_year = int(movie_data['Year'].max())
-        year = st.slider('Year', min_year, max_year)
+
         #df[df['Year'] == year] 
-        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.Year == year)]
+        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)]
         #movies[(movies.duration >= 200) & (movies.genre == 'Drama')]
         st.write(movie)        
         #if title:    

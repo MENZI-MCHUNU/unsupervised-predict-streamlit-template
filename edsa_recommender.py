@@ -164,7 +164,7 @@ def main():
         movie_data.genres = movie_data.genres.str.split('|')
         #movie_title = movie_data['rating'].unique()
         movie_rating = st.sidebar.number_input("Pick a rating ",0.5,5.0, step=0.5)
-        movie_data[movie_data['rating'] == movie_rating]    
+        movie_data[movie_data['rating'] == movie_rating][:5]    
         genres = explode(movie_data, ['genres'])
         movie_title = genres['genres'].unique()
         title = st.selectbox('Genre', movie_title)

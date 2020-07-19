@@ -168,7 +168,7 @@ def main():
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        movie = movie_data[(movie_dat.arating == movie_rating)&(movie_data.genres == title)]
+        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)]
         #movies[(movies.duration >= 200) & (movies.genre == 'Drama')]
         st.write(movie)        
         #if title:    

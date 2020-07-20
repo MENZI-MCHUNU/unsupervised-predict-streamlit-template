@@ -139,7 +139,7 @@ def collab_model(movie_list,top_n=10):
     # Save the utility matrix in scipy's sparse matrix format
     util_matrix_sparse = sp.sparse.csr_matrix(util_matrix_norm.values)
     # Compute the similarity matrix using the cosine similarity metric
-    user_similarity = cosine_similarity(np.array(util_matrix_sparse.T),np.array(util_matrix_sparse.T))
+    user_similarity = cosine_similarity(util_matrix_sparse.T)
     # Save the matrix as a dataframe to allow for easier indexing  
     #user_sim_df = pd.DataFrame(user_similarity,
     #                            index = util_matrix_norm.columns,

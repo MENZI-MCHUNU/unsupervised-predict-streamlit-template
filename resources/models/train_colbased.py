@@ -18,6 +18,8 @@ import pickle
 # Importing datasets
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 ratings.drop('timestamp',axis=1,inplace=True)
+ratings = ratings.sample(frac=0.005)
+ratings =  ratings.reset_index(drop=True)
 
 def svd_pp(save_path):
     # Check the range of the rating

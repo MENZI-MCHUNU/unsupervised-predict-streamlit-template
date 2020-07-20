@@ -36,7 +36,7 @@ from surprise import Reader, Dataset
 from surprise import SVD, NormalPredictor, BaselineOnly, KNNBasic, NMF
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
-
+from scipy.sparse import csr_matrix
 # Importing data
 movies_df = pd.read_csv('resources/data/movies.csv',sep = ',',delimiter=',')
 ratings_df = pd.read_csv('resources/data/ratings.csv')
@@ -123,15 +123,36 @@ def collab_model(movie_list,top_n=10):
     df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
     for i in movie_ids :
         df_init_users=df_init_users.append(ratings_df[ratings_df['userId']==i])
+
+    util_matrix = ratings_df.pivot_table(index=['userId'],
+                                       columns=['title'],
+                                       values='rating')    
+    # Normalize each row (a given user's ratings) of the utility matrix
+    util_matrix_norm = util_matrix.apply(lambda x: (x-np.mean(x))/(np.max(x)-np.min(x)), axis=1)
+    # Fill Nan values with 0's, transpose matrix, and drop users with no ratings
+    util_matrix_norm.fillna(0, inplace=True)
+    util_matrix_norm = util_matrix_norm.T
+    util_matrix_norm = util_matrix_norm.loc[:, (util_matrix_norm != 0).any(axis=0)]
+    # Save the utility matrix in scipy's sparse matrix format
+    util_matrix_sparse = sp.sparse.csr_matrix(util_matrix_norm.values)
+    # Compute the similarity matrix using the cosine similarity metric
+    user_similarity = cosine_similarity(np.array(util_matrix_sparse.T),np.array(util_matrix_sparse.T))
+    # Save the matrix as a dataframe to allow for easier indexing  
+    #user_sim_df = pd.DataFrame(user_similarity,
+    #                            index = util_matrix_norm.columns,
+    #                            columns = util_matrix_norm.columns)    
     # Getting the cosine similarity matrix
-    cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
+    #cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
     idx_1 = indices[indices == movie_list[0]].index[0]
     idx_2 = indices[indices == movie_list[1]].index[0]
     idx_3 = indices[indices == movie_list[2]].index[0]
     # Creating a Series with the similarity scores in descending order
-    rank_1 = cosine_sim[idx_1]
-    rank_2 = cosine_sim[idx_2]
-    rank_3 = cosine_sim[idx_3]
+    #rank_1 = cosine_sim[idx_1]
+    #rank_2 = cosine_sim[idx_2]
+    #rank_3 = cosine_sim[idx_3]
+    rank_1 = user_similarity[idx_1]
+    rank_2 = user_similarity[idx_2]
+    rank_3 = user_similarity[idx_3]
     # Calculating the scores
     score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
     score_series_2 = pd.Series(rank_2).sort_values(ascending = False)

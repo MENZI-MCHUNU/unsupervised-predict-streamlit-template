@@ -196,7 +196,7 @@ def collab_model(movie_list,top_n=10):
     # fit
     #model_knn.fit(data)
     
-    def fuzzy_matching(mapper, movie_list, verbose=True):
+    def fuzzy_matching(mapper, fav_movie, verbose=True):
         """
         return the closest match via fuzzy ratio. If no match found, return None
     
@@ -215,9 +215,20 @@ def collab_model(movie_list,top_n=10):
         match_tuple = []
         # get match
         for title, idx in mapper.items():
-            ratio = fuzz.ratio(title.lower(), movie_list.lower())
+            ratio = fuzz.ratio(title.lower(), fav_movie[0].lower())
             if ratio >= 60:
                 match_tuple.append((title, idx, ratio))
+                
+        # get match
+        for title, idx in mapper.items():
+            ratio = fuzz.ratio(title.lower(), fav_movie[1].lower())
+            if ratio >= 60:
+                match_tuple.append((title, idx, ratio))
+        # get match
+        for title, idx in mapper.items():
+            ratio = fuzz.ratio(title.lower(), fav_movie[2].lower())
+            if ratio >= 60:
+                match_tuple.append((title, idx, ratio))                
         # sort
         match_tuple = sorted(match_tuple, key=lambda x: x[2])[::-1]
         if not match_tuple:
@@ -229,8 +240,8 @@ def collab_model(movie_list,top_n=10):
     
     
     # get input movie index
-    print('You have input movie:', movie_list)
-    idx = fuzzy_matching(movie_to_idx, movie_list, verbose=True)
+    print('You have input movie:', fav_movie)
+    idx = fuzzy_matching(movie_to_idx, fav_movie, verbose=True)
     # inference
     print('Recommendation system start to make inference')
     print('......\n')

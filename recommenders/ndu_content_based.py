@@ -1,90 +1,124 @@
 """
-
     Content-based filtering for item recommendation.
-
     Author: Explore Data Science Academy.
-
     Note:
     ---------------------------------------------------------------------
     Please follow the instructions provided within the README.md file
     located within the root of this repository for guidance on how to use
     this script correctly.
-
     NB: You are required to extend this baseline algorithm to enable more
     efficient and accurate computation of recommendations.
-
     !! You must not change the name and signature (arguments) of the
     prediction function, `content_model` !!
-
     You must however change its contents (i.e. add your own content-based
     filtering algorithm), as well as altering/adding any other functions
     as part of your improvement.
-
     ---------------------------------------------------------------------
-
     Description: Provided within this file is a baseline content-based
     filtering algorithm for rating predictions on Movie data.
-
 """
 
 # Script dependencies
+
+import streamlit as st
 import os
 import pandas as pd
 import numpy as np
+from rake_nltk import Rake
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Importing data
 movies = pd.read_csv('resources/data/movies.csv', sep = ',',delimiter=',')
-ratings = pd.read_csv('resources/data/ratings.csv')
+imdb = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
+imdb.dropna(inplace=True)
 movies.dropna(inplace=True)
+movies = movies.merge(imdb, left_on='movieId', right_on='movieId', how='inner')
+movies.dropna(inplace=True)
+df = movies[['title','genres','director','title_cast','plot_keywords']]
+#rename columns
+df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']
 
-def data_preprocessing(subset_size):
-    """Prepare data for use within Content filtering algorithm.
+# discarding the commas between the actors' full names and getting only the first three names
+df.loc[:,'Actors'] = df.loc[:,'Actors'].map(lambda x: x.split('|')[:3])
 
-    Parameters
-    ----------
-    subset_size : int
-        Number of movies to use within the algorithm.
+# putting the genres in a list of words
+df.loc[:,'Genre'] = df.loc[:,'Genre'].map(lambda x: x.lower().split('|'))
 
-    Returns
-    -------
-    Pandas Dataframe
-        Subset of movies selected for content-based filtering.
+df.loc[:,'Director'] = df.loc[:,'Director'].map(lambda x: x.split(' '))
 
-    """
-    # Split genre data into individual words.
-    movies['keyWords'] = movies['genres'].str.replace('|', ' ')
-    # Subset of the data
-    movies_subset = movies[:subset_size]
-    return movies_subset
+# merging together first and last name for each actor and director, so it's considered as one word
+# and there is no mix up between people sharing a first name
+for index, row in df.iterrows():
+    row['Actors'] = [x.lower().replace(' ','') for x in row['Actors']]
+    row['Director'] = ''.join(row['Director']).lower()
+
+# initializing the new column
+df.loc[:,'Key_words'] = ""
+
+for index, row in df.iterrows():
+    plot = row['Plot']
+
+    # instantiating Rake, by default is uses english stopwords from NLTK
+    # and discard all puntuation characters
+    r = Rake()
+
+    # extracting the words by passing the text
+    r.extract_keywords_from_text(plot)
+
+    # getting the dictionary whith key words and their scores
+    key_words_dict_scores = r.get_word_degrees()
+
+    # assigning the key words to the new column
+    row['Key_words'] = list(key_words_dict_scores.keys())
+
+# dropping the Plot column
+df.drop(columns = ['Plot'], inplace = True)
+
+df.set_index('Title', inplace = True)
+df.head()
+
+df.loc[:,'bag_of_words'] = ''
+columns = df.columns
+for index, row in df.iterrows():
+    words = ''
+    for col in columns:
+        if col != 'Director':
+            words = words + ' '.join(row[col])+ ' '
+        else:
+            words = words + row[col]+ ' '
+    row['bag_of_words'] = words
+
+df.drop(columns = [col for col in df.columns if col!= 'bag_of_words'], inplace = True)
+# Subset of the data
+movies_subset = df[:1000]
 
 # !! DO NOT CHANGE THIS FUNCTION SIGNATURE !!
 # You are, however, encouraged to change its content.
+
+#@st.cache(allow_output_mutation=True)
 def content_model(movie_list,top_n=10):
     """Performs Content filtering based upon a list of movies supplied
        by the app user.
-
     Parameters
     ----------
     movie_list : list (str)
         Favorite movies chosen by the app user.
     top_n : type
         Number of top recommendations to return to the user.
-
     Returns
     -------
     list (str)
         Titles of the top-n movie recommendations to the user.
-
     """
     # Initializing the empty list of recommended movies
     recommended_movies = []
-    data = data_preprocessing(27000)
+    data = movies_subset
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
-    count_matrix = count_vec.fit_transform(data['keyWords'])
-    indices = pd.Series(data['title'])
+    count_matrix = count_vec.fit_transform(data['bag_of_words'])
+    #indices = pd.Series(data['Title'])
+    indices = pd.Series(data.index)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
@@ -108,5 +142,5 @@ def content_model(movie_list,top_n=10):
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
     for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies['title'])[i])
+        recommended_movies.append(list(data.index)[i])
     return recommended_movies

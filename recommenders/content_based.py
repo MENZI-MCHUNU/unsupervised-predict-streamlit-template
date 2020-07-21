@@ -52,12 +52,12 @@ def data_preprocessing(subset_size):
     """
 
     # discarding the commas between the actors' full names and getting only the first three names
-    df['Actors'] = df['Actors'].map(lambda x: x.split('|')[:3])
+    df.loc[:,'Actors'] = df.loc[:,'Actors'].map(lambda x: x.split('|')[:3])
 
     # putting the genres in a list of words
-    df['Genre'] = df['Genre'].map(lambda x: x.lower().split('|'))
+    df.loc[:,'Genre'] = df.loc[:,'Genre'].map(lambda x: x.lower().split('|'))
 
-    df['Director'] = df['Director'].map(lambda x: x.split(' '))
+    df.loc[:,'Director'] = df.loc[:,'Director'].map(lambda x: x.split(' '))
 
     # merging together first and last name for each actor and director, so it's considered as one word
     # and there is no mix up between people sharing a first name
@@ -66,7 +66,7 @@ def data_preprocessing(subset_size):
         row['Director'] = ''.join(row['Director']).lower()
 
     # initializing the new column
-    df['Key_words'] = ""
+    df.loc[:,'Key_words'] = ""
 
     for index, row in df.iterrows():
         plot = row['Plot']
@@ -90,7 +90,7 @@ def data_preprocessing(subset_size):
     df.set_index('Title', inplace = True)
     df.head()
 
-    df['bag_of_words'] = ''
+    df.loc[:,'bag_of_words'] = ''
     columns = df.columns
     for index, row in df.iterrows():
         words = ''

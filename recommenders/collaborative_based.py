@@ -121,52 +121,126 @@ def collab_model(movie_list,top_n=10):
 
     """
 
-    indices = pd.Series(movies_df['title'])
-    movie_ids = pred_movies(movie_list)
-    df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
-    for i in movie_ids :
-        df_init_users=df_init_users.append(ratings_df[ratings_df['userId']==i])
+    #indices = pd.Series(movies_df['title'])
+    #movie_ids = pred_movies(movie_list)
+    #df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
+    #for i in movie_ids :
+    #    df_init_users=df_init_users.append(ratings_df[ratings_df['userId']==i])
 
-    util_matrix = ratings_df.pivot_table(index=['userId'],
-                                       columns=['title'],
-                                       values='rating')    
+    #util_matrix = ratings_df.pivot_table(index=['userId'],
+    #                                   columns=['title'],
+    #                                   values='rating')    
     # Normalize each row (a given user's ratings) of the utility matrix
-    util_matrix_norm = util_matrix.apply(lambda x: (x-np.mean(x))/(np.max(x)-np.min(x)), axis=1)
+    #util_matrix_norm = util_matrix.apply(lambda x: (x-np.mean(x))/(np.max(x)-np.min(x)), axis=1)
     # Fill Nan values with 0's, transpose matrix, and drop users with no ratings
-    util_matrix_norm.fillna(0, inplace=True)
-    util_matrix_norm = util_matrix_norm.T
-    util_matrix_norm = util_matrix_norm.loc[:, (util_matrix_norm != 0).any(axis=0)]
+    #util_matrix_norm.fillna(0, inplace=True)
+    #util_matrix_norm = util_matrix_norm.T
+    #util_matrix_norm = util_matrix_norm.loc[:, (util_matrix_norm != 0).any(axis=0)]
     # Save the utility matrix in scipy's sparse matrix format
-    util_matrix_sparse = sp.sparse.csr_matrix(util_matrix_norm.values)
+    #util_matrix_sparse = sp.sparse.csr_matrix(util_matrix_norm.values)
     # Compute the similarity matrix using the cosine similarity metric
-    user_similarity = cosine_similarity(util_matrix_sparse.T, util_matrix_sparse.T)
+    #user_similarity = cosine_similarity(util_matrix_sparse.T, util_matrix_sparse.T)
     # Save the matrix as a dataframe to allow for easier indexing  
     #user_sim_df = pd.DataFrame(user_similarity,
     #                            index = util_matrix_norm.columns,
     #                            columns = util_matrix_norm.columns)    
     # Getting the cosine similarity matrix
     #cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
-    idx_1 = indices[indices == movie_list[0]].index[0]
-    idx_2 = indices[indices == movie_list[1]].index[0]
-    idx_3 = indices[indices == movie_list[2]].index[0]
+    #idx_1 = indices[indices == movie_list[0]].index[0]
+    #idx_2 = indices[indices == movie_list[1]].index[0]
+    #idx_3 = indices[indices == movie_list[2]].index[0]
     # Creating a Series with the similarity scores in descending order
     #rank_1 = cosine_sim[idx_1]
     #rank_2 = cosine_sim[idx_2]
     #rank_3 = cosine_sim[idx_3]
-    rank_1 = user_similarity[idx_1]
-    rank_2 = user_similarity[idx_2]
-    rank_3 = user_similarity[idx_3]
+    #rank_1 = user_similarity[idx_1]
+    #rank_2 = user_similarity[idx_2]
+    #rank_3 = user_similarity[idx_3]
     # Calculating the scores
-    score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
-    score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
-    score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
+    #score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
+    #score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
+    #score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
      # Appending the names of movies
-    listings = score_series_1.append(score_series_1).append(score_series_3).sort_values(ascending = False)
-    recommended_movies = []
+    #listings = score_series_1.append(score_series_1).append(score_series_3).sort_values(ascending = False)
+    #recommended_movies = []
     # Choose top 50
-    top_50_indexes = list(listings.iloc[1:50].index)
+    #top_50_indexes = list(listings.iloc[1:50].index)
     # Removing chosen movies
-    top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
-    for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies_df['title'])[i])
-    return recommended_movies
+    #top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
+    #for i in top_indexes[:top_n]:
+    #    recommended_movies.append(list(movies_df['title'])[i])
+    #return recommended_movies
+    df_movies_cnt = pd.DataFrame(ratings_df.groupby('movieId').size(), columns=['count'])
+    popularity_thres = 50
+    popular_movies = list(set(df_movies_cnt.query('count >= @popularity_thres').index))
+    df_ratings_drop_movies = ratings_df[ratings_df.movieId.isin(popular_movies)]
+    
+    # get number of ratings given by every user
+    df_users_cnt = pd.DataFrame(df_ratings_drop_movies.groupby('userId').size(), columns=['count'])
+    ratings_thres = 50
+    active_users = list(set(df_users_cnt.query('count >= @ratings_thres').index))
+    df_ratings_drop_users = df_ratings_drop_movies[df_ratings_drop_movies.userId.isin(active_users)]
+    # pivot and create movie-user matrix
+    movie_user_mat = df_ratings_drop_users.pivot(index='movieId', columns='userId', values='rating').fillna(0)
+    # create mapper from movie title to index
+    movie_to_idx = {
+        movie: i for i, movie in 
+        enumerate(list(movies_df.set_index('movieId').loc[movie_user_mat.index].title))
+    }
+    # transform matrix to scipy sparse matrix
+    movie_user_mat_sparse = csr_matrix(movie_user_mat.values)
+    
+    model_knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20, n_jobs=-1)
+    # fit
+    model_knn.fit(movie_user_mat_sparse)
+    # fit
+    #model_knn.fit(data)
+    
+    def fuzzy_matching(mapper, fav_movie, verbose=True):
+        """
+        return the closest match via fuzzy ratio. If no match found, return None
+    
+        Parameters
+        ----------    
+        mapper: dict, map movie title name to index of the movie in data
+
+        fav_movie: str, name of user input movie
+    
+        verbose: bool, print log if True
+
+        Return
+        ------
+        index of the closest match
+        """
+        match_tuple = []
+        # get match
+        for title, idx in mapper.items():
+            ratio = fuzz.ratio(title.lower(), fav_movie.lower())
+            if ratio >= 60:
+                match_tuple.append((title, idx, ratio))
+        # sort
+        match_tuple = sorted(match_tuple, key=lambda x: x[2])[::-1]
+        if not match_tuple:
+            print('Oops! No match is found')
+            return
+        if verbose:
+            print('Found possible matches in our database: {0}\n'.format([x[0] for x in match_tuple]))
+        return match_tuple[0][1]    
+    
+    
+    # get input movie index
+    print('You have input movie:', fav_movie)
+    idx = fuzzy_matching(movie_to_idx, fav_movie, verbose=True)
+    # inference
+    print('Recommendation system start to make inference')
+    print('......\n')
+    distances, indices = model_knn.kneighbors(movie_user_mat_sparse[idx], n_neighbors=n_recommendations+1)
+    # get list of raw idx of recommendations
+    raw_recommends = \
+        sorted(list(zip(indices.squeeze().tolist(), distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
+    # get reverse mapper
+    reverse_mapper = {v: k for k, v in movie_to_idx.items()}
+    # print recommendations
+    print('Recommendations for {}:'.format(fav_movie))
+    for i, (idx, dist) in enumerate(raw_recommends):
+        print('{0}: {1}'.format(i+1, reverse_mapper[idx], dist))

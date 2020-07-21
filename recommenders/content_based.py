@@ -36,7 +36,8 @@ movies.dropna(inplace=True)
 movies = movies.merge(imdb, left_on='movieId', right_on='movieId', how='inner')
 movies.dropna(inplace=True)
 df = movies[['title','genres','director','title_cast','plot_keywords']]
-
+#rename columns
+df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']
 #@st.cache(allow_output_mutation=True)
 def data_preprocessing(subset_size):
     """Prepare data for use within Content filtering algorithm.
@@ -49,8 +50,6 @@ def data_preprocessing(subset_size):
     Pandas Dataframe
         Subset of movies selected for content-based filtering.
     """
-    #rename columns
-    df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']
 
     # discarding the commas between the actors' full names and getting only the first three names
     df['Actors'] = df['Actors'].map(lambda x: x.split('|')[:3])
@@ -135,9 +134,9 @@ def content_model(movie_list,top_n=10):
     indices = pd.Series(data.index)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
-    idx_1 = indices[indices == movie_list[0]].index[0]
-    idx_2 = indices[indices == movie_list[1]].index[0]
-    idx_3 = indices[indices == movie_list[2]].index[0]
+    idx_1 = indices[indices == movie_list].index[0]
+    idx_2 = indices[indices == movie_list].index[0]
+    idx_3 = indices[indices == movie_list].index[0]
     # Creating a Series with the similarity scores in descending order
     rank_1 = cosine_sim[idx_1]
     rank_2 = cosine_sim[idx_2]
@@ -156,5 +155,5 @@ def content_model(movie_list,top_n=10):
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
     for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies['Title'])[i])
+        recommended_movies.append(list(data.index)[i])
     return recommended_movies

@@ -120,7 +120,7 @@ def collab_model(movie_list,top_n=10):
         Titles of the top-n movie recommendations to the user.
 
     """
-
+    movie_list = movie_list[0]
     #indices = pd.Series(movies_df['title'])
     #movie_ids = pred_movies(movie_list)
     #df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
@@ -196,7 +196,7 @@ def collab_model(movie_list,top_n=10):
     # fit
     #model_knn.fit(data)
     
-    def fuzzy_matching(mapper, fav_movie, verbose=True):
+    def fuzzy_matching(mapper, movie_list, verbose=True):
         """
         return the closest match via fuzzy ratio. If no match found, return None
     
@@ -215,7 +215,7 @@ def collab_model(movie_list,top_n=10):
         match_tuple = []
         # get match
         for title, idx in mapper.items():
-            ratio = fuzz.ratio(title.lower(), fav_movie.lower())
+            ratio = fuzz.ratio(title.lower(), movie_list.lower())
             if ratio >= 60:
                 match_tuple.append((title, idx, ratio))
         # sort
@@ -229,8 +229,8 @@ def collab_model(movie_list,top_n=10):
     
     
     # get input movie index
-    print('You have input movie:', fav_movie)
-    idx = fuzzy_matching(movie_to_idx, fav_movie, verbose=True)
+    print('You have input movie:', movie_list)
+    idx = fuzzy_matching(movie_to_idx, movie_list, verbose=True)
     # inference
     print('Recommendation system start to make inference')
     print('......\n')

@@ -120,7 +120,7 @@ def collab_model(movie_list,top_n=10):
         Titles of the top-n movie recommendations to the user.
 
     """
-    movie_list = movie_list[0]
+    #movie_list = movie_list[0]
     #indices = pd.Series(movies_df['title'])
     #movie_ids = pred_movies(movie_list)
     #df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
@@ -245,7 +245,7 @@ def collab_model(movie_list,top_n=10):
     # inference
     print('Recommendation system start to make inference')
     print('......\n')
-    distances, indices = model_knn.kneighbors(movie_user_mat_sparse[idx], n_neighbors=n_recommendations+1)
+    distances, indices = model_knn.kneighbors(movie_user_mat_sparse[idx], n_neighbors=top_n+1)
     # get list of raw idx of recommendations
     raw_recommends = \
         sorted(list(zip(indices.squeeze().tolist(), distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]

@@ -245,7 +245,7 @@ def collab_model(movie_list,top_n=10):
     idx = fuzzy_matching(movie_to_idx, movie_list, verbose=True)
     listings = pd.Series(idx)
     # Appending the names of movies
-    top_50_indexes = list(listings)
+    top_50_indexes = list(listings.index)
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[movie_list[0],movie_list[1],movie_list[2]]) 
     for i in top_indexes[:top_n]:

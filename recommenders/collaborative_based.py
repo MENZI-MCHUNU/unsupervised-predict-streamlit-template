@@ -243,11 +243,13 @@ def collab_model(movie_list,top_n=10):
     # get input movie index
     #print('You have input movie:', fav_movie)
     idx = fuzzy_matching(movie_to_idx, movie_list, verbose=True)
-    listings = pd.Series(idx)
+    #listings = pd.Series(idx)
     # Appending the names of movies
-    top_50_indexes = list(listings.index)
+    #top_50_indexes = list(listings.index)
     # Removing chosen movies
-    top_indexes = np.setdiff1d(top_50_indexes,[movie_list[0],movie_list[1],movie_list[2]]) 
-    for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies_df['title'])[i])    
-    return recommended_movies
+    #top_indexes = np.setdiff1d(top_50_indexes,[movie_list[0],movie_list[1],movie_list[2]]) 
+    #for i in top_indexes[:top_n]:
+    #    recommended_movies.append(list(movies_df['title'])[i])
+    unwanted = [movie_list[0],movie_list[1],movie_list[2]]    
+    list1 = [ele for ele in idx if ele not in unwanted]
+    return list1[:top_n]

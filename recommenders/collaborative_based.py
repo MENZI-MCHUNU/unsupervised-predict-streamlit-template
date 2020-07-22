@@ -195,7 +195,7 @@ def collab_model(movie_list,top_n=10):
     # fit
     #model_knn.fit(data)
     
-    def fuzzy_matching(mapper, fav_movie, verbose=True):
+    def fuzzy_matching(mapper, movie_list, verbose=True):
         """
         return the closest match via fuzzy ratio. If no match found, return None
     
@@ -214,18 +214,18 @@ def collab_model(movie_list,top_n=10):
         match_tuple = []
         # get match
         for title, idx in mapper.items():
-            ratio = fuzz.ratio(title.lower(), fav_movie[0].lower())
+            ratio = fuzz.ratio(title.lower(), movie_list[0].lower())
             if ratio >= 60:
                 match_tuple.append((title, idx, ratio))
                 
         # get match
         for title, idx in mapper.items():
-            ratio = fuzz.ratio(title.lower(), fav_movie[1].lower())
+            ratio = fuzz.ratio(title.lower(), movie_list[1].lower())
             if ratio >= 60:
                 match_tuple.append((title, idx, ratio))
         # get match
         for title, idx in mapper.items():
-            ratio = fuzz.ratio(title.lower(), fav_movie[2].lower())
+            ratio = fuzz.ratio(title.lower(), movie_list[2].lower())
             if ratio >= 60:
                 match_tuple.append((title, idx, ratio))                
         # sort
@@ -242,12 +242,12 @@ def collab_model(movie_list,top_n=10):
     recommended_movies = []
     # get input movie index
     #print('You have input movie:', fav_movie)
-    idx = fuzzy_matching(movie_to_idx, fav_movie, verbose=True)
+    idx = fuzzy_matching(movie_to_idx, movie_list, verbose=True)
     listings = pd.Series(idx)
     # Appending the names of movies
     top_50_indexes = list(listings.iloc[1:50].index)
     # Removing chosen movies
-    top_indexes = np.setdiff1d(top_50_indexes,[fav_movie[0],fav_movie[1],fav_movie[2]]) 
+    top_indexes = np.setdiff1d(top_50_indexes,[movie_list[0],movie_list[1],movie_list[2]]) 
     for i in top_indexes[:top_n]:
         recommended_movies.append(list(movies_df['title'])[i])    
     return recommended_movies

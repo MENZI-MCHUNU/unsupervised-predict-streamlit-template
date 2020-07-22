@@ -158,11 +158,11 @@ def content_model(movie_list,top_n=10):
     rank_2 = cosine_sim[idx_2]
     rank_3 = cosine_sim[idx_3]
     # Calculating the scores
-    #score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
-    #score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
-    #score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
+    score_series_1 = pd.Dataframe(rank_1).sort_values(ascending = False)
+    score_series_2 = pd.Dataframe(rank_2).sort_values(ascending = False)
+    score_series_3 = pd.Dataframe(rank_3).sort_values(ascending = False)
     # Getting the indexes of the 10 most similar movies
-    listings = rank_1.append(rank_1).append(rank_3).sort_values(ascending = False)
+    listings = score_series_1.append(score_series_1).append(score_series_3).sort_values(ascending = False)
 
     # Store movie names
     recommended_movies = []

@@ -170,7 +170,7 @@ def collab_model(movie_list,top_n=10):
     #for i in top_indexes[:top_n]:
     #    recommended_movies.append(list(movies_df['title'])[i])
     #return recommended_movies
-     df_movies_cnt = pd.DataFrame(ratings_df.groupby('movieId').size(), columns=['count'])
+    df_movies_cnt = pd.DataFrame(ratings_df.groupby('movieId').size(), columns=['count'])
     popularity_thres = 50
     popular_movies = list(set(df_movies_cnt.query('count >= @popularity_thres').index))
     df_ratings_drop_movies = ratings_df[ratings_df.movieId.isin(popular_movies)]

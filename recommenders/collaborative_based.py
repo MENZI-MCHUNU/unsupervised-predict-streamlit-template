@@ -43,7 +43,7 @@ ratings_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv'
 ratings_df.drop(['timestamp'], axis=1,inplace=True)
 
 # We make use of an SVD model trained on a subset of the MovieLens 10k dataset.
-model=pickle.load(open('resources/models/SVD.pkl', 'rb'))
+model=pickle.load(open('/resources/models/SVD.pkl', 'rb'))
 
 def prediction_item(item_id):
     """Map a given favourite movie to users within the
@@ -65,12 +65,9 @@ def prediction_item(item_id):
     load_df = Dataset.load_from_df(ratings_df,reader)
     a_train = load_df.build_full_trainset()
 
-    # Build an algorithm, and train it.
-    algo = KNNBasic()
-    algo.train(a_train)
-    predictions = []
+
     for ui in a_train.all_users():
-        predictions.append(algo.predict(iid=item_id,uid=ui, verbose = True))
+        predictions.append(model.predict(iid=item_id,uid=ui, verbose = True))
     return predictions
 
 def pred_movies(movie_list):

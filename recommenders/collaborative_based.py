@@ -38,6 +38,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from scipy.sparse import csr_matrix
 # Importing data
+from fuzzywuzzy import fuzz
+from sklearn.neighbors import NearestNeighbors
 movies_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv',sep = ',',delimiter=',')
 ratings_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 ratings_df.drop(['timestamp'], axis=1,inplace=True)

@@ -162,7 +162,7 @@ def content_model(movie_list,top_n=10):
     score_series_2 = pd.DataFrame(rank_2)#.sort_values(ascending = False)
     score_series_3 = pd.DataFrame(rank_3)#.sort_values(ascending = False)
     # Getting the indexes of the 10 most similar movies
-    listings = score_series_1.append(score_series_1).append(score_series_3).sort_values(ascending = False)
+    listings = score_series_1.append(score_series_1).append(score_series_3)#.sort_values(ascending = False)
 
     # Store movie names
     recommended_movies = []

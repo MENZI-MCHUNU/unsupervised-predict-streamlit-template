@@ -39,7 +39,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from scipy.sparse import csr_matrix
 # Importing data
 movies_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv',sep = ',',delimiter=',')
-ratings_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/ratings.csv')
+ratings_df = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 ratings_df.drop(['timestamp'], axis=1,inplace=True)
 
 # We make use of an SVD model trained on a subset of the MovieLens 10k dataset.

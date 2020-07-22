@@ -33,11 +33,19 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
+from rake_nltk import Rake
 
 # Importing data
-movies = pd.read_csv('resources/data/movies.csv', sep = ',',delimiter=',')
-ratings = pd.read_csv('resources/data/ratings.csv')
+movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv', sep = ',',delimiter=',')
+ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
+imdb = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 movies.dropna(inplace=True)
+imdb.dropna(inplace=True)
+movies = movies.merge(imdb, left_on='movieId', right_on='movieId', how='inner')
+movies.dropna(inplace=True)
+df = movies[['title','genres','director','title_cast','plot_keywords']]
+#rename columns
+df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']
 
 def data_preprocessing(subset_size):
     """Prepare data for use within Content filtering algorithm.
@@ -78,13 +86,68 @@ def content_model(movie_list,top_n=10):
         Titles of the top-n movie recommendations to the user.
 
     """
+    # discarding the commas between the actors' full names and getting only the first three names
+    df.loc[:,'Actors'] = df.loc[:,'Actors'].map(lambda x: x.split('|')[:3])
+    # putting the genres in a list of words
+    df.loc[:,'Genre'] = df.loc[:,'Genre'].map(lambda x: x.lower().split('|'))
+
+    df.loc[:,'Director'] = df.loc[:,'Director'].map(lambda x: x.split(' '))
+    # merging together first and last name for each actor and director, so it's considered as one word
+    # and there is no mix up between people sharing a first name
+    for index, row in df.iterrows():
+        row['Actors'] = [x.lower().replace(' ','') for x in row['Actors']]
+        row['Director'] = ''.join(row['Director']).lower()   
+
+    # initializing the new column
+    df.loc[:,'Key_words'] = ""
+
+    for index, row in df.iterrows():
+        plot = row['Plot']        
+
+        # instantiating Rake, by default is uses english stopwords from NLTK
+        # and discard all puntuation characters
+        r = Rake()      
+
+        # extracting the words by passing the text
+        r.extract_keywords_from_text(plot)  
+
+        # getting the dictionary whith key words and their scores
+        key_words_dict_scores = r.get_word_degrees()
+
+        # assigning the key words to the new column
+        row['Key_words'] = list(key_words_dict_scores.keys())  
+
+
+    # dropping the Plot column
+    df.drop(columns = ['Plot'], inplace = True)
+
+    df.set_index('Title', inplace = True)
+
+    df.loc[:,'bag_of_words'] = ''
+    columns = df.columns
+
+    for index, row in df.iterrows():
+        words = ''
+        for col in columns:
+            if col != 'Director':
+                words = words + ' '.join(row[col])+ ' '
+            else:
+                words = words + row[col]+ ' '
+        row['bag_of_words'] = words
+
+    df.drop(columns = [col for col in df.columns if col!= 'bag_of_words'], inplace = True)
+    # Subset of the data
+    movies_subset = df[:1000]
+
+
+
     # Initializing the empty list of recommended movies
     recommended_movies = []
-    data = data_preprocessing(27000)
+    data = movies_subset               #data_preprocessing(27000)
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
-    count_matrix = count_vec.fit_transform(data['keyWords'])
-    indices = pd.Series(data['title'])
+    count_matrix = count_vec.fit_transform(data['bag_of_words'])
+    indices = pd.Series(data.index)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
@@ -108,5 +171,5 @@ def content_model(movie_list,top_n=10):
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
     for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies['title'])[i])
+        recommended_movies.append(list(data.index)[i])
     return recommended_movies

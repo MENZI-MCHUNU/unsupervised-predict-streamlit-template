@@ -170,7 +170,7 @@ def collab_model(movie_list,top_n=10):
     #for i in top_indexes[:top_n]:
     #    recommended_movies.append(list(movies_df['title'])[i])
     #return recommended_movies
-    df_movies_cnt = pd.DataFrame(ratings_df.groupby('movieId').size(), columns=['count'])
+     df_movies_cnt = pd.DataFrame(ratings_df.groupby('movieId').size(), columns=['count'])
     popularity_thres = 50
     popular_movies = list(set(df_movies_cnt.query('count >= @popularity_thres').index))
     df_ratings_drop_movies = ratings_df[ratings_df.movieId.isin(popular_movies)]
@@ -235,23 +235,20 @@ def collab_model(movie_list,top_n=10):
             print('Oops! No match is found')
             return
         if verbose:
-            print('Found possible matches in our database: {0}\n'.format([x[0] for x in match_tuple]))
-        return match_tuple[0][1]    
+            #print('Found possible matches in our database: {0}\n'.format([x[0] for x in match_tuple]))
+            list_ = [x[0] for x in match_tuple]
+        return list_#match_tuple[0][1]    
     
-    
+    # Store movie names
+    recommended_movies = []
     # get input movie index
-    print('You have input movie:', fav_movie)
+    #print('You have input movie:', fav_movie)
     idx = fuzzy_matching(movie_to_idx, fav_movie, verbose=True)
-    # inference
-    print('Recommendation system start to make inference')
-    print('......\n')
-    distances, indices = model_knn.kneighbors(movie_user_mat_sparse[idx], n_neighbors=top_n+1)
-    # get list of raw idx of recommendations
-    raw_recommends = \
-        sorted(list(zip(indices.squeeze().tolist(), distances.squeeze().tolist())), key=lambda x: x[1])[:0:-1]
-    # get reverse mapper
-    reverse_mapper = {v: k for k, v in movie_to_idx.items()}
-    # print recommendations
-    print('Recommendations for {}:'.format(fav_movie))
-    for i, (idx, dist) in enumerate(raw_recommends):
-        print('{0}: {1}'.format(i+1, reverse_mapper[idx], dist))
+    listings = pd.Series(idx)
+    # Appending the names of movies
+    top_50_indexes = list(listings.iloc[1:50].index)
+    # Removing chosen movies
+    top_indexes = np.setdiff1d(top_50_indexes,[fav_movie[0],fav_movie[1],fav_movie[2]]) 
+    for i in top_indexes[:top_n]:
+        recommended_movies.append(list(movies_df['title'])[i])    
+    return recommended_movies

@@ -98,7 +98,7 @@ svd=SVD(n_factors=25)
 #making the dataset to train our model
 train = rating_dataset.build_full_trainset()
 #training our model
-svd.train(train)
+svd.fit(train)
 
 #Making a new series which have two columns in it 
 #Movie name and movie id 

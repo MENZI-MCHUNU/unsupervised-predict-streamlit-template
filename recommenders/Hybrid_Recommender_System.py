@@ -12,12 +12,14 @@ import random
 import re 
 #import gtts
 from surprise import Reader, Dataset, SVD
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 #importing the dataset
 movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
-
+movies = movies.sample(frac=0.5)
+movies =  movies.reset_index(drop=True)
 
 def explode(df, lst_cols, fill_value='', preserve_index=False):
     import numpy as np

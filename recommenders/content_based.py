@@ -122,7 +122,7 @@ def content_model(movie_list,top_n=10):
     # dropping the Plot column
     df.drop(columns = ['Plot'], inplace = True)
 
-    df.set_index('Title', inplace = True)
+    #df.set_index('Title', inplace = True)
 
     df.loc[:,'bag_of_words'] = ''
     columns = df.columns

@@ -85,8 +85,7 @@ def content_model(movie_list,top_n=10):
 
     """
     movies1 = pd.merge(movies, imdb, on='movieId')
-    st.write(movies1)
-    #movies1.dropna(inplace=True)
+    movies1.dropna(inplace=True)
     df = movies1[['title','genres','director','title_cast','plot_keywords']]
     #rename columns
     df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']

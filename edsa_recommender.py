@@ -50,7 +50,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Search for a Movie","About Machine Learning App","Instruction of use"]
+    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Search for a Movie","About Machine Learning App","Instruction of use","Hybrid Recommender System"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -76,16 +76,16 @@ def main():
         # Perform top-10 movie recommendation generation
         if sys == 'Content Based Filtering':
             if st.button("Recommend"):
-                #try:
+                try:
                     with st.spinner('Crunching the numbers...'):
                         top_recommendations = content_model(movie_list=fav_movies,
                                                             top_n=10)
                     st.title("We think you'll like:")
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
-                #except:
-                    #st.error("Oops! Looks like this algorithm does't work.\
-                    #          We'll need to fix it!")
+                except:
+                    st.error("Oops! Looks like this algorithm does't work.\
+                              We'll need to fix it!")
 
 
         if sys == 'Collaborative Based Filtering':
@@ -125,7 +125,15 @@ def main():
         #df[df['Country Name'] == country]
         #movie_title = df['title'].unique()
         #title = st.selectbox('title', movie_title)
-
+        ##################################################################################
+        #movies_df[‘year’] = movies_df.title.str.extract(‘(\(\d\d\d\d\))’,expand=False)
+        #Removing the parentheses
+        #movies_df[‘year’] = movies_df.year.str.extract(‘(\d\d\d\d)’,expand=False)
+        #Removing the years from the ‘title’ column
+        #movies_df[‘title’] = movies_df.title.str.replace(‘(\(\d\d\d\d\))’, ‘’)
+        #Applying the strip function to get rid of any ending whitespace characters that may have appeared
+        #movies_df[‘title’] = movies_df[‘title’].apply(lambda x: x.strip())
+        #########################################################################################
         def explode(df, lst_cols, fill_value='', preserve_index=False):
             import numpy as np
              # make sure `lst_cols` is list-alike
@@ -347,7 +355,10 @@ def main():
             wordcloud.generate_from_frequencies(words)
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
-            st.pyplot()                                                                             
+            st.pyplot()
+
+    if page_selection == "Hybrid Recommender System":
+                                                                                             
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

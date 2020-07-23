@@ -152,7 +152,7 @@ def content_model(movie_list,top_n=10):
 
     # Initializing the empty list of recommended movies
     recommended_movies = []
-    data = #data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
+    data = movies_subset#data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
     count_matrix = count_vec.fit_transform(data['bag_of_words'])

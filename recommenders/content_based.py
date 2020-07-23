@@ -157,9 +157,9 @@ def content_model(movie_list,top_n=10):
     indices = pd.Series(data['Title'])
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
-    idx_1 = indices[indices == movie_list[0]].index[0]
-    idx_2 = indices[indices == movie_list[1]].index[0]
-    idx_3 = indices[indices == movie_list[2]].index[0]
+    idx_1 = indices[indices == movie_list[0]].index
+    idx_2 = indices[indices == movie_list[1]].index
+    idx_3 = indices[indices == movie_list[2]].index
     # Creating a Series with the similarity scores in descending order
     rank_1 = cosine_sim[idx_1]
     rank_2 = cosine_sim[idx_2]

@@ -42,7 +42,7 @@ from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
 import time
 # Data Loading
-title_list = load_movie_titles('resources/data/movies.csv')
+title_list = load_movie_titles('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 rating_m = pd.read_csv('resources/data/ratings.csv')
 imdb = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 # App declaration

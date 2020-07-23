@@ -84,9 +84,9 @@ def content_model(movie_list,top_n=10):
         Titles of the top-n movie recommendations to the user.
 
     """
-    movies = pd.merge(movies, imdb, on='movieId')
-    movies.dropna(inplace=True)
-    df = movies[['title','genres','director','title_cast','plot_keywords']]
+    movies1 = pd.merge(movies, imdb, on='movieId')
+    movies1.dropna(inplace=True)
+    df = movies1[['title','genres','director','title_cast','plot_keywords']]
     #rename columns
     df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']
     # discarding the commas between the actors' full names and getting only the first three names
@@ -182,5 +182,5 @@ def content_model(movie_list,top_n=10):
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
     for i in top_indexes[:top_n]:
-        recommended_movies.append(list(movies['title'])[i])
+        recommended_movies.append(list(movies1['title'])[i])
     return recommended_movies

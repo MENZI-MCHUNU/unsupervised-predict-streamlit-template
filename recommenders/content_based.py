@@ -40,7 +40,7 @@ movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv', s
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 imdb = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 movies.dropna(inplace=True)
-#imdb.dropna(inplace=True)
+imdb.dropna(inplace=True)
 movies = pd.merge(movies, imdb[['movieId','plot_keywords']], on='movieId')
 movies.dropna(inplace=True)
 

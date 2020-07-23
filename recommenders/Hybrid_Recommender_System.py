@@ -91,9 +91,6 @@ reader=Reader()
 #the order is very specific and we have to follow the same order
 rating_dataset = Dataset.load_from_df(ratings[['userId','movieId','rating']],reader)
 
-#Using the split function to perform cross validation 
-rating_dataset.split(n_folds=6)
-
 #Intialising the SVD model and specifying the number of latent features
 #we can tune this parameters according to our requirement
 svd=SVD(n_factors=25)

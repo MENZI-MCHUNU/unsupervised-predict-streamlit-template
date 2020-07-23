@@ -41,8 +41,8 @@ ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 imdb = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
 movies.dropna(inplace=True)
 imdb.dropna(inplace=True)
-movies = pd.merge(movies, imdb[['movieId','plot_keywords']], on='movieId')
-movies.dropna(inplace=True)
+#movies = pd.merge(movies, imdb[['movieId','plot_keywords']], on='movieId')
+#movies.dropna(inplace=True)
 
 st.write(movies)
 def data_preprocessing(subset_size):

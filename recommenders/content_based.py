@@ -136,7 +136,7 @@ def content_model(movie_list,top_n=10):
                 words = words + row[col]+ ' '
         row['bag_of_words'] = words
 
-    df.drop(columns = [col for col in df.columns if col!= 'bag_of_words'], inplace = True)
+    df.drop(columns = [col for col in df.columns if col!= ['Title','bag_of_words']], inplace = True)
     # Subset of the data
     movies_subset = df[:1000]
     df_t = data_preprocessing(27000)
@@ -149,7 +149,7 @@ def content_model(movie_list,top_n=10):
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
     count_matrix = count_vec.fit_transform(data['bag_of_words'])
-    indices = pd.Series(data.index)
+    indices = pd.Series(data['Title'])
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
@@ -173,5 +173,5 @@ def content_model(movie_list,top_n=10):
     # Removing chosen movies
     top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
     for i in top_indexes[:top_n]:
-        recommended_movies.append(list(data.index)[i])
+        recommended_movies.append(list(movies['title'])[i])
     return recommended_movies

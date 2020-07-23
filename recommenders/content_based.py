@@ -149,7 +149,7 @@ def content_model(movie_list,top_n=10):
     df_t = data_preprocessing(27000)
     st.write(df_t)
     st.write(movies_subset)
-
+    st.write(df)
     # Initializing the empty list of recommended movies
     recommended_movies = []
     data = movies_subset #data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)

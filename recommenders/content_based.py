@@ -139,9 +139,9 @@ def content_model(movie_list,top_n=10):
     df.drop(columns = [col for col in df.columns if col!= 'bag_of_words'], inplace = True)
     #df['bag_of_words'] = row['bag_of_words']
     #df['bag_of_words'] = row['bag_of_words']
-    df['Title'] = df.index
-    #df.reset_index()
-    df.reset_index(drop=True)
+    #df['Title'] = df.index
+    df.reset_index()
+    #df.reset_index(drop=True)
     # Subset of the data
     movies_subset = df[:1000]
     df_t = data_preprocessing(27000)

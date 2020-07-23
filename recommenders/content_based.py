@@ -145,7 +145,7 @@ def content_model(movie_list,top_n=10):
     df.reset_index(inplace = True)
     #df.reset_index(drop=True)
     # Subset of the data
-    movies_subset = df[:1000]
+    movies_subset = df[:27000]
     df_t = data_preprocessing(27000)
     st.write(df_t)
     st.write(df.head())

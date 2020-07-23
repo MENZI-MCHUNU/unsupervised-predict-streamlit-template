@@ -156,7 +156,7 @@ def content_model(movie_list,top_n=10):
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
     count_matrix = count_vec.fit_transform(data['bag_of_words'])
-    indices = pd.Series(data['Title'])
+    indices = pd.Series(movies_subset['Title'])
     st.write(indices)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title

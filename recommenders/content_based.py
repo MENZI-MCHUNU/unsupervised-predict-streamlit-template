@@ -44,7 +44,7 @@ imdb.dropna(inplace=True)
 #movies = pd.merge(movies, imdb[['movieId','plot_keywords']], on='movieId')
 #movies.dropna(inplace=True)
 
-st.write(movies)
+#st.write(movies)
 def data_preprocessing(subset_size):
     """Prepare data for use within Content filtering algorithm.
 
@@ -85,7 +85,8 @@ def content_model(movie_list,top_n=10):
 
     """
     movies1 = pd.merge(movies, imdb, on='movieId')
-    movies1.dropna(inplace=True)
+    st.write(movies1)
+    #movies1.dropna(inplace=True)
     df = movies1[['title','genres','director','title_cast','plot_keywords']]
     #rename columns
     df.columns = ['Title', 'Genre', 'Director', 'Actors', 'Plot']

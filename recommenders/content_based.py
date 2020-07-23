@@ -155,7 +155,7 @@ def content_model(movie_list,top_n=10):
     data = data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
-    count_matrix = count_vec.fit_transform(data['bag_of_words'])
+    count_matrix = count_vec.fit_transform(data['keyWords'])
     indices = pd.Series(data['title'])
     st.write(indices)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)

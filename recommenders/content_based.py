@@ -152,7 +152,7 @@ def content_model(movie_list,top_n=10):
 
     # Initializing the empty list of recommended movies
     recommended_movies = []
-    data = movies_subset#data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
+    data = movies_subset #data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
     count_matrix = count_vec.fit_transform(data['bag_of_words'])
@@ -160,9 +160,9 @@ def content_model(movie_list,top_n=10):
     st.write(indices)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
-    idx_1 = indices[indices == movie_list[0]].index[0]
-    idx_2 = indices[indices == movie_list[1]].index[0]
-    idx_3 = indices[indices == movie_list[2]].index[0]
+    idx_1 = indices[indices == movie_list[0]]
+    idx_2 = indices[indices == movie_list[1]]
+    idx_3 = indices[indices == movie_list[2]]
     st.write(idx_1)
     # Creating a Series with the similarity scores in descending order
     rank_1 = cosine_sim[idx_1]

@@ -122,7 +122,7 @@ def content_model(movie_list,top_n=10):
     # dropping the Plot column
     df.drop(columns = ['Plot'], inplace = True)
 
-    #df.set_index('Title', inplace = True)
+    df.set_index('Title', inplace = True)
 
     df.loc[:,'bag_of_words'] = ''
     columns = df.columns
@@ -136,7 +136,7 @@ def content_model(movie_list,top_n=10):
                 words = words + row[col]+ ' '
         row['bag_of_words'] = words
     #dt = df['Title']
-    #df.drop(columns = [col for col in df.columns if col!= ['Title','bag_of_words']], inplace = True)
+    df.drop(columns = [col for col in df[['Genre','Director','Actors','Key_words']] if col!= 'bag_of_words'], inplace = True)
     #df['bag_of_words'] = row['bag_of_words']
     #df['Title'] = dt
     # Subset of the data

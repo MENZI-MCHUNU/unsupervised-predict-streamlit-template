@@ -20,6 +20,8 @@ movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
 movies = movies.sample(frac=0.5)
 movies =  movies.reset_index(drop=True)
+ratings = ratings.sample(frac=0.1)
+ratings =  ratings.reset_index(drop=True)
 
 def explode(df, lst_cols, fill_value='', preserve_index=False):
     import numpy as np

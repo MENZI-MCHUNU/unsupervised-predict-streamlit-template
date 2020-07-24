@@ -65,10 +65,10 @@ movies['year'] = movies.title.str.extract('(\(\d\d\d\d\))',expand=False)
 #Removing the parentheses
 movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
 #Removing the years from the ‘title’ column
-movies['title'] = movies.title.str.replace('(\(\d\d\d\d\))', '')
+#movies['title'] = movies.title.str.replace('(\(\d\d\d\d\))', '')
 
 #Applying the strip function to get rid of any ending whitespace characters that may have appeared
-movies['title'] = movies['title'].apply(lambda x: x.strip())
+#movies['title'] = movies['title'].apply(lambda x: x.strip())
 
 
 '''Applying the Cotent_Based Filtering'''

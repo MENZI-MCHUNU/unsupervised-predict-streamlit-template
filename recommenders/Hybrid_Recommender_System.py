@@ -108,7 +108,7 @@ movies_dataset = movies.reset_index()
 titles = movies_dataset['title']
 indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 #Function to make recommendation to the user
-def recommendataion(movie):
+def recommendation(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
     ind=indices[movie]

@@ -207,7 +207,7 @@ def main():
             return URL            
         if len(movie) !=0:           
             #for i in range(len(movie)):
-            for _, row in movie.iterrows()
+            for _, row in movie.iterrows():
                 st.write(row['title'])
                 st.write(youtube_link(title = row['title']))
     # Building out the EDA page

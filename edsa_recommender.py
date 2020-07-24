@@ -367,7 +367,7 @@ def main():
         title_list1 = load_movie_titles('recommenders/hybrid_movies.csv')
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',title_list1)
+        movie_1 = st.selectbox('Fisrt Option',title_list1[500:700])
 
         if st.button("Recommend"):
             #try:

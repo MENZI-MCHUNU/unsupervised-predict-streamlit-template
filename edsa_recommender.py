@@ -206,9 +206,10 @@ def main():
             URL = base + q + page
             return URL            
         if len(movie) !=0:           
-            for i in range(len(movie)):
-                st.write(movie['title'])
-                st.write(youtube_link(movie['title']))
+            #for i in range(len(movie)):
+            for _, row in movie.iterrows()
+                st.write(row['title'])
+                st.write(youtube_link(title = row['title']))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")

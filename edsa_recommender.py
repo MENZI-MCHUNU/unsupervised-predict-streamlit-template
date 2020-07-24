@@ -40,7 +40,7 @@ from wordcloud import WordCloud, STOPWORDS #used to generate world cloud
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
-#from recommenders.Hybrid_Recommender_System import recommendation
+from recommenders.Hybrid_Recommender_System import recommendation
 import time
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
@@ -358,24 +358,24 @@ def main():
             plt.axis('off')
             st.pyplot()
 
-    #if page_selection == "Hybrid Recommender System":
-        #st.image('resources/imgs/Image_header.png',use_column_width=True)
+    if page_selection == "Hybrid Recommender System":
+        st.image('resources/imgs/Image_header.png',use_column_width=True)
         #st.write('### Enter Your User Id')
         #user_Id = rating_m['userId'][:1000]
         #user_Id = rating_m['userId'].unique()
         #user_id1 = st.selectbox('Fisrt Option',user_Id[:1000])
-        #title_list1 = load_movie_titles('~/unsupervised_data/unsupervised_movie_data/movies.csv')
+        title_list1 = load_movie_titles('/resources/data/hybrid_movies.csv')
         # User-based preferences
-        #st.write('### Enter Your Three Favorite Movies')
-        #movie_1 = st.selectbox('Fisrt Option',title_list1)
+        st.write('### Enter Your Three Favorite Movies')
+        movie_1 = st.selectbox('Fisrt Option',title_list1)
 
-        #if st.button("Recommend"):
-            #try:
-                #with st.spinner('Crunching the numbers...'):
-                    #top_recommendations = recommendation(user_id = user_id1,movie = movie_1)
-                #st.title("We think you'll like:")
-                #for i,j in enumerate(top_recommendations):
-                    #st.subheader(str(i+1)+'. '+j)
+        if st.button("Recommend"):
+            try:
+                with st.spinner('Crunching the numbers...'):
+                    top_recommendations = recommendation(user_id = user_id1,movie = movie_1)
+                st.title("We think you'll like:")
+                for i,j in enumerate(top_recommendations):
+                    st.subheader(str(i+1)+'. '+j)
 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

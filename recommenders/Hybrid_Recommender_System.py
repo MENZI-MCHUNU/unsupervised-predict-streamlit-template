@@ -18,9 +18,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 #importing the dataset
 movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
-movies = movies.sample(frac=0.5)
+movies = movies.sample(frac=0.1)
 movies =  movies.reset_index(drop=True)
-ratings = ratings.sample(frac=0.1)
+ratings = ratings.sample(frac=0.05)
 ratings =  ratings.reset_index(drop=True)
 
 def explode(df, lst_cols, fill_value='', preserve_index=False):
@@ -64,13 +64,13 @@ movies = explode(movies1, ['genres'])
 movies['year'] = movies.title.str.extract('(\(\d\d\d\d\))',expand=False)
 #Removing the parentheses
 movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
-#Removing the years from the ‘title’ column
-#movies['title'] = movies.title.str.replace('(\(\d\d\d\d\))', '')
+#Removing the years from the title column
+movies['title'] = movies.title.str.replace('(\(\d\d\d\d\))', '')
 
 #Applying the strip function to get rid of any ending whitespace characters that may have appeared
-#movies['title'] = movies['title'].apply(lambda x: x.strip())
+movies['title'] = movies['title'].apply(lambda x: x.strip())
 
-
+movies.to_csv('/resources/data/hybrid_movies.csv')
 '''Applying the Cotent_Based Filtering'''
  #Applying Feature extraction 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -108,10 +108,10 @@ movies_dataset = movies.reset_index()
 titles = movies_dataset['title']
 indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 #Function to make recommendation to the user
-def recommendation(user_id,movie):
+def recommendataion(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
-    ind=indices[movie].iloc[0]
+    ind=indices[movie]
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))
     #Sorting the list obtained
@@ -119,7 +119,7 @@ def recommendation(user_id,movie):
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]    
     print('The Movie You Should Watched Next Are --')
-    print('ID ,   Name ,  Average Ratings , Predicted Rating ')
+    print('ID ,   Name ,  Average Ratings , Year ')
     #Varible to print only top 10 movies
     count=0
     for id in range(0,len(movie_id)):
@@ -127,19 +127,13 @@ def recommendation(user_id,movie):
         if(ind != movie_id[id]):
             rating=ratings[ratings['movieId']==movie_id[id]]['rating']
             avg_ratings=round(np.mean(rating),2)
-            #For getting all the movies that a particular user has rated
-            rated_movies=list(ratings[ratings['userId']==user_id]['movieId'])
-            #to take only thoese movies that a particular user and not watched yet
-            if(id not in rated_movies):
-                #To print only those movies which have an average ratings that is more than 3.5
-                if(avg_ratings >3.5):
-                    count+=1
-                    #Getting the movie_id of the corresponding movie_name
-                    id_movies=movies_dataset[movies_dataset['movie_name']==titles[movie_id[id]]]['movieId'].iloc[0]
-                    predicted_ratings=round(svd.predict(user_id,movie_id[id]).est,2)
-                    print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}, {predicted_ratings}')
-                    result.append([titles[movie_id[id]],str('Predicted Rating'),str(predicted_ratings)])
-                if(count >=10):
-                        break
+            #To print only thoese movies which have an average ratings that is more than 3.5
+            if(avg_ratings >3.5):
+                count+=1
+                print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
+                result.append([titles[movie_id[id]],str(avg_ratings)])
+            if(count >=10):
+                    break
+    
+    print('Wait!! i am telling your recommendation')
     return result
-

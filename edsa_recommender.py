@@ -207,7 +207,7 @@ def main():
             return URL            
         if len(movie) !=0:           
             for i in range(len(movie)):
-                st.write(movie['title'][i])
+                st.write(movie['title'])
                 st.write(youtube_link(movie['title'][i]))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":

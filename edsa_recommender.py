@@ -206,47 +206,13 @@ def main():
             URL = base + q + page
             return URL            
         if len(movie) !=0:           
-            #for i in range(len(movie)):
             for _, row in movie.iterrows():
                 st.write(row['title'])
                 st.write(youtube_link(title = row['title']))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")
-        st.subheader("Rating Data")
-        if st.checkbox('Show Rating data'):
-            st.write(rating_m[['userId','movieId','rating']])
-        if st.checkbox('Show RatinMoviesg data'):
-            st.write(title_list)          
-        if st.checkbox('Show Rating bar graph'):    
-            num_users = len(rating_m.userId.unique())
-            num_items = len(rating_m.movieId.unique())
-            st.markdown('There are {} unique users and {} unique movies in this data set'.format(num_users, num_items))
-            # get count
-            df_ratings_cnt_tmp = pd.DataFrame(rating_m[['userId','movieId','rating']].groupby('rating').size(), columns=['count'])           
-            # there are a lot more counts in rating of zero
-            total_cnt = num_users * num_items
-            rating_zero_cnt = total_cnt - rating_m[['userId','movieId','rating']].shape[0]
-            # append counts of zero rating to df_ratings_cnt
-            df_ratings_cnt = df_ratings_cnt_tmp.append(
-                    pd.DataFrame({'count': rating_zero_cnt}, index=[0.0]),
-                    verify_integrity=True,
-            ).sort_index()            
-            # add log count
-            df_ratings_cnt['log_count'] = np.log(df_ratings_cnt['count'])
- 
-            ax = df_ratings_cnt[['count']].reset_index().rename(columns={'index': 'rating score'}).plot(
-                        x='rating score',
-                        y='count',
-                        kind='bar',
-                        figsize=(12, 8),
-                        title='Count for Each Rating Score (in Log Scale)',
-                        logy=True,
-                        fontsize=12,
-            )
-            ax.set_xlabel("movie rating score")
-            ax.set_ylabel("number of ratings") 
-            st.pyplot()  
+        st.subheader("")        
         if st.checkbox('Show Rating graph'):
             rating_m.groupby('rating')['userId'].count().plot(kind = 'bar', color = 'g',figsize = (8,7))
             plt.xticks(rotation=85, fontsize = 14)
@@ -308,7 +274,7 @@ def main():
             plt.axis('off')
             st.pyplot() 
 
-        if st.checkbox('Show WordCloud of Actors'):
+        if st.checkbox('Show WordCloud of Actors/Actresses'):
             imdb["title_cast"] = imdb["title_cast"].astype('str')
             imdb["director"] = imdb["director"].astype('str')
             imdb["plot_keywords"] = imdb["plot_keywords"].astype('str')
@@ -331,55 +297,6 @@ def main():
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
             st.pyplot()  
-
-        if st.checkbox('Show WordCloud of genres'):
-            #define a function that counts the number of times each genre appear:
-            def count_word(df, ref_col, lister):
-                keyword_count = dict()
-                for s in lister: keyword_count[s] = 0
-                for lister_keywords in df[ref_col].str.split('|'):
-                    if type(lister_keywords) == float and pd.isnull(lister_keywords): continue
-                    for s in lister_keywords: 
-                        if pd.notnull(s): keyword_count[s] += 1
-                # convert the dictionary in a list to sort the keywords  by frequency
-                keyword_occurences = []
-                for k,v in keyword_count.items():
-                    keyword_occurences.append([k,v])
-                keyword_occurences.sort(key = lambda x:x[1], reverse = True)
-                return keyword_occurences, keyword_count      
- 
-            #here we  make census of the genres:
-            genre_labels = set()
-            title_list["genres"] = title_list["genres"].astype('str')
-            title_list["genres"] = title_list["genres"].apply(lambda x: x.replace('|',' '))
-            for s in title_list['genres']:
-                genre_labels = genre_labels.union(set(s))  
-            #counting how many times each of genres occur:
-            keyword_occurences, dum = count_word(title_list, 'genres', genre_labels)
-            # Function that control the color of the words
-            def random_color_func(word=None, font_size=None, position=None,
-                      orientation=None, font_path=None, random_state=None):
-                h = int(360.0 * tone / 255.0)
-                s = int(100.0 * 255.0 / 255.0)
-                l = int(100.0 * float(random_state.randint(70, 120)) / 255.0)
-            return "hsl({}, {}%, {}%)".format(h, s, l)
-
-
-            #Finally, the result is shown as a wordcloud:
-            words = dict()
-            trunc_occurences = keyword_occurences[0:50]
-            for s in trunc_occurences:
-                words[s[0]] = s[1]
-            tone = 100 # define the color of the words
-            f, ax = plt.subplots(figsize=(14, 6))
-            wordcloud = WordCloud(width=550,height=300, background_color='white', 
-                                    max_words=1628,relative_scaling=0.7,
-                                    color_func = random_color_func,
-                                    normalize_plurals=False)
-            wordcloud.generate_from_frequencies(words)
-            plt.imshow(wordcloud, interpolation="bilinear")
-            plt.axis('off')
-            st.pyplot()
 
     if page_selection == "Hybrid Recommender System":
         st.image('resources/imgs/Image_header.png',use_column_width=True)

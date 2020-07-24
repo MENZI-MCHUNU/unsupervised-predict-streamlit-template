@@ -188,9 +188,26 @@ def main():
         if len(movie) !=0:
             st.write(movie)
         if len(movie) ==0:
-        #len(df1.index)
             st.write('We have no movies for that rating!')        
-             
+        def youtube_link(title):
+    
+            """This function takes in the title of a movie and returns a Search query link to youtube
+    
+            INPUT: ('The Lttle Mermaid')
+            -----------
+    
+            OUTPUT: https://www.youtube.com/results?search_query=The+little+Mermaid&page=1
+            ----------
+            """
+            title = title.replace(' ','+')
+            base = "https://www.youtube.com/results?search_query="
+            q = title
+            page = "&page=1"
+            URL = base + q + page
+            return URL            
+        if len(movie) !=0:           
+            for i in range(len(movie)):
+                st.write(youtube_link(movie['title'][i]))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")

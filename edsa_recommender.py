@@ -168,7 +168,10 @@ def main():
             return res  
 
         movie_data = pd.merge(rating_m, df, on='movieId')
-        movie_data['timestamp'] = movie_data['timestamp'].apply(lambda x: time.strftime('%Y', time.localtime(x)))
+        #movie_data['timestamp'] = movie_data['timestamp'].apply(lambda x: time.strftime('%Y', time.localtime(x)))
+        movie_data['year'] = movie_data.title.str.extract('(\(\d\d\d\d\))',expand=False)
+        #Removing the parentheses
+        movie_data['year'] = movie_data.year.str.extract('(\d\d\d\d)',expand=False)
         #movie_year = st.sidebar.slider("Pick the Year",1995,2019)
         movie_data.genres = movie_data.genres.str.split('|')
         #movie_title = movie_data['rating'].unique()
@@ -177,8 +180,8 @@ def main():
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
-        year_of_rating = movie_data['timestamp'].sort_values(ascending=True).unique()
-        rating_year = st.selectbox('Year', year_of_rating)
+        year_of_movie_release = movie_data['year'].sort_values(ascending=True).unique()
+        rating_year = st.selectbox('Year', year_of_movie_release)
 
         movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.timestamp == rating_year)]
         if len(movie) !=0:

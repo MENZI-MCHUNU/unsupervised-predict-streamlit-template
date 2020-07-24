@@ -361,7 +361,7 @@ def main():
     if page_selection == "Hybrid Recommender System":
         st.image('resources/imgs/Image_header.png',use_column_width=True)
         st.write('### Enter Your User Id')
-        user_Id = rating_m['userId']
+        user_Id = rating_m['userId'][:1000]
         user_id1 = st.selectbox('Fisrt Option',user_Id)
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')

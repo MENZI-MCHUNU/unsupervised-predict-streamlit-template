@@ -182,9 +182,9 @@ def main():
         title = st.selectbox('Genre', movie_title)
         movie_data['year'].dropna(inplace = True)
         year_of_movie_release = movie_data['year'].sort_values(ascending=False).unique()
-        rating_year = st.selectbox('Year', year_of_movie_release)
+        release_year = st.selectbox('Year', year_of_movie_release)
 
-        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.timestamp == rating_year)]
+        movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.year == release_year)]
         if len(movie) !=0:
             st.write(movie)
         if len(movie) ==0:

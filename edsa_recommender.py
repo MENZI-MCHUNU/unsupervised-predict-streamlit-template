@@ -371,7 +371,7 @@ def main():
         if st.button("Recommend"):
             #try:
                 with st.spinner('Crunching the numbers...'):
-                    top_recommendations = recommendation(user_id1,movie_1)
+                    top_recommendations = recommendation(user_id = user_id1,movie = movie_1)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
                     st.subheader(str(i+1)+'. '+j)

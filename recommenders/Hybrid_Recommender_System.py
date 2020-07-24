@@ -16,10 +16,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 #importing the dataset
-movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv')
+movies = pd.read_csv('hybrid_movies.csv')
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
-movies = movies.sample(frac=0.1)
-movies =  movies.reset_index(drop=True)
+#movies = movies.sample(frac=0.5)
+#movies =  movies.reset_index(drop=True)
 ratings = ratings.sample(frac=0.05)
 ratings =  ratings.reset_index(drop=True)
 
@@ -70,7 +70,7 @@ movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
 #Applying the strip function to get rid of any ending whitespace characters that may have appeared
 #movies['title'] = movies['title'].apply(lambda x: x.strip())
 
-movies.to_csv('hybrid_movies.csv')
+#movies.to_csv('hybrid_movies.csv')
 '''Applying the Cotent_Based Filtering'''
  #Applying Feature extraction 
 from sklearn.feature_extraction.text import TfidfVectorizer

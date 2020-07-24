@@ -40,6 +40,7 @@ from wordcloud import WordCloud, STOPWORDS #used to generate world cloud
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
+from recommenders.Hybrid_Recommender import recommendation
 import time
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
@@ -358,7 +359,22 @@ def main():
             st.pyplot()
 
     if page_selection == "Hybrid Recommender System":
-                                                                                             
+        st.image('resources/imgs/Image_header.png',use_column_width=True)
+        st.write('### Enter Your User Id')
+        user_Id = rating_m['userId']
+        user_id1 = st.selectbox('Fisrt Option',user_Id)
+        # User-based preferences
+        st.write('### Enter Your Three Favorite Movies')
+        movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
+
+        if st.button("Recommend"):
+            #try:
+                with st.spinner('Crunching the numbers...'):
+                    top_recommendations = recommendation(user_id=user_id1, title=movie_1)
+                st.title("We think you'll like:")
+                for i,j in enumerate(top_recommendations):
+                    st.subheader(str(i+1)+'. '+j)
+
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

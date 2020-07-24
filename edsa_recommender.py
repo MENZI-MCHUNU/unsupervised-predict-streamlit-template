@@ -179,8 +179,8 @@ def main():
            
         movie_data = explode(movie_data, ['genres'])
         movie_title = movie_data['genres'].unique()
-        movie_title.dropna(inplace = True)
         title = st.selectbox('Genre', movie_title)
+        movie_data['year'].dropna(inplace = True)
         year_of_movie_release = movie_data['year'].sort_values(ascending=False).unique()
         rating_year = st.selectbox('Year', year_of_movie_release)
 

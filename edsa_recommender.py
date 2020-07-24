@@ -208,7 +208,7 @@ def main():
         if len(movie) !=0:           
             for i in range(len(movie)):
                 st.write(movie['title'])
-                st.write(youtube_link(movie['title'][i]))
+                st.write(youtube_link(movie['title']))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.title("Insights on how people rate movies")

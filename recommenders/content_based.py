@@ -147,9 +147,7 @@ def content_model(movie_list,top_n=10):
     # Subset of the data
     movies_subset = df[:27000]
     df_t = data_preprocessing(27000)
-    st.write(df_t)
     st.write(movies_subset)
-    st.write(df)
     # Initializing the empty list of recommended movies
     recommended_movies = []
     data = data_preprocessing(27000) #movies_subset               #data_preprocessing(27000)
@@ -157,13 +155,12 @@ def content_model(movie_list,top_n=10):
     count_vec = CountVectorizer()
     count_matrix = count_vec.fit_transform(data['keyWords'])
     indices = pd.Series(data['title'])
-    st.write(indices)
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
     idx_2 = indices[indices == movie_list[1]].index[0]
     idx_3 = indices[indices == movie_list[2]].index[0]
-    st.write(idx_1)
+
     # Creating a Series with the similarity scores in descending order
     rank_1 = cosine_sim[idx_1]
     rank_2 = cosine_sim[idx_2]

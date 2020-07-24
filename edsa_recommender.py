@@ -331,6 +331,9 @@ def main():
         st.markdown('<p> Collaborative filtering approaches build a model from a user\'s past behavior (items previously purchased or selected and/or numerical ratings given to those items) as well as similar decisions made by other users. This model is then used to predict items (or ratings for items) that the user may have an interest in.<p/>', unsafe_allow_html=True)
         st.subheader('Content-based filtering')
         st.markdown('<p>Content-based filtering approaches utilize a series of discrete, pre-tagged characteristics of an item in order to recommend additional items with similar properties. Current recommender systems typically combine one or more approaches into a hybrid system.</p>', unsafe_allow_html=True)
+        st.subheader('Hybrid filtering')
+        st.markdown('<p>Hybrid filtering technique is a combination of multiple recommendation techniques like, merging collaborative filtering with content-based filtering or vice-versa. </p>')
+        st.markdown('<p>Most recommender systems now use a hybrid approach, combining collaborative filtering, content-based filtering, and other approaches . There is no reason why several different techniques of the same type could not be hybridized. Hybrid approaches can be implemented in several ways: by making content-based and collaborative-based predictions separately and then combining them; by adding content-based capabilities to a collaborative-based approach (and vice versa); or by unifying the approaches into one model</p>')
         st.markdown('<p>For more information about building data Apps Please go to :<a href="https://www.streamlit.io/">streamlit site</a></p>', unsafe_allow_html=True)	
         st.markdown('<p> </p>', unsafe_allow_html=True)	
 

@@ -370,7 +370,7 @@ def main():
         movie_1 = st.selectbox('Fisrt Option',title_list1)
 
         if st.button("Recommend"):
-            try:
+            #try:
                 with st.spinner('Crunching the numbers...'):
                     top_recommendations = recommendation(user_id = user_id1,movie = movie_1)
                 st.title("We think you'll like:")

@@ -358,7 +358,7 @@ def main():
             plt.axis('off')
             st.pyplot()
 
-    if page_selection == "Hybrid Recommender System":
+    #if page_selection == "Hybrid Recommender System":
         #st.image('resources/imgs/Image_header.png',use_column_width=True)
         #st.write('### Enter Your User Id')
         #user_Id = rating_m['userId'][:1000]

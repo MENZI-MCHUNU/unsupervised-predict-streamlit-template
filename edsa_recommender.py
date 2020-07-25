@@ -183,6 +183,7 @@ def main():
         movie_title = movie_data['genres'].unique()
         title = st.selectbox('Genre', movie_title)
         movie_data['year'].dropna(inplace = True)
+        movie_data = movie_data.drop(['movieId','timestamp','userId'], axis = 1)
         year_of_movie_release = movie_data['year'].sort_values(ascending=False).unique()
         release_year = st.selectbox('Year', year_of_movie_release)
 

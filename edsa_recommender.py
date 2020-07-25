@@ -240,18 +240,22 @@ def main():
             high_ratings= h+i+j 
             # To view proportions of ratings categories, it is best practice to use pie charts
             # Where the slices will be ordered and plotted clockwise:
-            labels = 'Low Ratings (scale: 0.5 - 2.0)', 'Medium Ratings (scale: 2.5 - 3.5)', 'High Ratings (scale: 4.0 - 5.0)'
+            labels = 'Low Ratings', 'Medium Ratings', 'High Ratings'
             sizes = [low_ratings, medium_ratings,  high_ratings]
             explode = (0, 0, 0.1)  # Only "explore" the 3rd slice (i.e. 'Anti')
 
             # Create pie chart with the above labels and calculated class proportions as inputs
             fig1, ax1 = plt.subplots()
             ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-                    shadow=True, startangle=270,textprops={'rotation': 65})
+                    shadow=True, startangle=270)#,textprops={'rotation': 65}
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
             plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
-            st.markdown("This is a pie chart showing the rating of movie by people who have watched them.")
+            st.markdown("This is a pie chart showing the rating of movies by people who have watched them.")
+            st.markdown("Low Ratings (scale: 0.5 - 2.0)")
+            st.markdown("Medium Ratings (scale: 2.5 - 3.5)")
+            st.markdown("High Ratings (scale: 4.0 - 5.0)")
+
         if st.checkbox('Show WordCloud of directors'):   
             imdb["title_cast"] = imdb["title_cast"].astype('str')
             imdb["director"] = imdb["director"].astype('str')

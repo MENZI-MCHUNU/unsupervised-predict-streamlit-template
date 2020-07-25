@@ -223,6 +223,7 @@ def main():
             plt.title('Distribution of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
             st.markdown("This is a bar graph showing the rating of movie by people who have watched them.")
+            st.markdown("The number of ratings is the total number of rating for each scale from 0.5 upto 5.0 rated by people who watched the movies.")
         if st.checkbox('Show Pie chart for ratings'):
             # Calculate and categorise ratings proportions
             a = len(rating_m.loc[rating_m['rating']== 0.5]) / len(rating_m)
@@ -280,7 +281,7 @@ def main():
             plt.axis('off')
             st.pyplot() 
             st.markdown("This is a wordcloud of the directors of movies in this Application.")
-
+            st.markdown("This wordcloud shows the most popular directors on the movies.")
         if st.checkbox('Show WordCloud of Actors/Actresses'):
             imdb["title_cast"] = imdb["title_cast"].astype('str')
             imdb["director"] = imdb["director"].astype('str')
@@ -305,7 +306,7 @@ def main():
             plt.axis('off')
             st.pyplot()  
             st.markdown("This is a wordcloud for Actors/Actresses on the movies on this Application.")
-
+            st.markdown("This wordcloud shows the most popular Actors/Actresses on the movies.")
         if st.checkbox("Show wordcloud of different genres"):    
             movies = pd.read_csv('resources/data/movies.csv')
             #here we  make census of the genres:

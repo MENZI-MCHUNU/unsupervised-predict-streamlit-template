@@ -316,11 +316,12 @@ def main():
                 words[s[0]] = s[1]
             tone = 100 # define the color of the words
             f, ax = plt.subplots(figsize=(14, 6))
-            wordcloud = WordCloud(width=550,height=300, background_color='white', 
+            wordcloud = WordCloud(width=1000,height=800, background_color='white', 
                                 max_words=1628,relative_scaling=0.7,
                                 color_func = random_color_func,
                                 normalize_plurals=False)
             wordcloud.generate_from_frequencies(words)
+            plt.figure(figsize=(16,12))
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
             st.pyplot()

@@ -371,11 +371,18 @@ def main():
         st.markdown('On the left you will see a side bar that has all of the pages on this App.')
         st.image('recommenders/images/page5.png',width = 600)
         st.markdown('We have another page where we show you Actors , directors and how other people that watched the movies rate them.')
+        st.markdown('recommenders/images/page18.png',width = 600 )
         st.markdown('This word cloud show the most popular Actors/Actresses on this movie App.')
+        st.image('recommenders/images/page7.png',width = 600)
         st.markdown('This word cloud shows the different genres you can find on this App.')
+        st.image('recommenders/images/page8.png',width = 600)
         st.markdown('The Search for a Movie page is an alternative to search for movies using filters instead of using Recommender Systems . The filters you can use are the release year of a movie, the rating of a movie and the genre of a movie and this will allow you to play around and find a specific movie using filters.')
+        st.image(['recommenders/images/page10.png','recommenders/images/page11.png'],width = 600)
+        st.image(['recommenders/images/page12.png','recommenders/images/page13.png'],width = 600)
         st.markdown('Whe you scroll down this page you will see that as you change the movie name and a link . The link is a youtube movie trailer for that movie.')
+        st.image('recommenders/images/page14.png',width = 600)
         st.markdown('Then when you click the link it will take you to the youtube page for the trailer of that movie.')
+        st.image('recommenders/images/page15.png',width = 600)
 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

@@ -70,7 +70,7 @@ movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
 #Applying the strip function to get rid of any ending whitespace characters that may have appeared
 #movies['title'] = movies['title'].apply(lambda x: x.strip())
 
-#movies.to_csv('hybrid_movies.csv')
+movies.to_csv('hybrid_movies.csv')
 '''Applying the Cotent_Based Filtering'''
  #Applying Feature extraction 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -111,8 +111,8 @@ indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 def recommendation(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
-    st.write(movie)
-    ind=indices[movie]
+    st.write(movie[0])
+    ind=indices[indices == movie[0]].index[0]
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))
     #Sorting the list obtained

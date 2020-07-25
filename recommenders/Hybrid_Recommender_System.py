@@ -112,7 +112,7 @@ def recommendation(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
     st.write(movie[0])
-    ind=indices[movie[0]].index
+    ind=indices[indices == movie[0]].index
     st.write(ind)
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))

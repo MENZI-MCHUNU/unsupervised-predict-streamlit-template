@@ -213,8 +213,7 @@ def main():
                 st.write(youtube_link(title = row['title']))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
-        st.title("Insights on how people rate movies")
-        st.subheader("")        
+        st.title("Insights on how people rate movies")       
         if st.checkbox('Show Rating graph'):
             rating_m.groupby('rating')['userId'].count().plot(kind = 'bar', color = 'g',figsize = (8,7))
             plt.xticks(rotation=85, fontsize = 14)
@@ -223,6 +222,7 @@ def main():
             plt.ylabel('No. of Ratings', fontsize=16)
             plt.title('Distribution of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
+            st.markdown("This is a bar graph showing the rating of movie by people who have watched them.")
         if st.checkbox('Show Pie chart for ratings'):
             # Calculate and categorise ratings proportions
             a = len(rating_m.loc[rating_m['rating']== 0.5]) / len(rating_m)
@@ -247,11 +247,11 @@ def main():
             # Create pie chart with the above labels and calculated class proportions as inputs
             fig1, ax1 = plt.subplots()
             ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-                    shadow=True, startangle=270)
+                    shadow=True, startangle=270,textprops={'rotation': 90})
             ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
             plt.title('Categorised Proportions of User Ratings ',bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 18)
             st.pyplot()
-                      
+            st.markdown("This is a pie chart showing the rating of movie by people who have watched them.")
         if st.checkbox('Show WordCloud of directors'):   
             imdb["title_cast"] = imdb["title_cast"].astype('str')
             imdb["director"] = imdb["director"].astype('str')
@@ -275,6 +275,7 @@ def main():
             plt.imshow(wordcloud)
             plt.axis('off')
             st.pyplot() 
+            st.markdown("This is a wordcloud of the directors of movies in this Application.")
 
         if st.checkbox('Show WordCloud of Actors/Actresses'):
             imdb["title_cast"] = imdb["title_cast"].astype('str')
@@ -299,6 +300,7 @@ def main():
             plt.imshow(wordcloud)
             plt.axis('off')
             st.pyplot()  
+            st.markdown("This is a wordcloud for Actors/Actresses on the movies on this Application.")
 
         if st.checkbox("Show wordcloud of different genres"):    
             movies = pd.read_csv('resources/data/movies.csv')
@@ -325,30 +327,7 @@ def main():
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
             st.pyplot()
-
-        if st.checkbox("Show dustribution of Genres"):
-            movies = pd.read_csv('resources/data/movies.csv')
-            #here we  make census of the genres:
-            genre_labels = set()
-            for s in movies['genres'].str.split('|').values:
-                genre_labels = genre_labels.union(set(s))            
-            #counting how many times each of genres occur:
-            keyword_occurences, dum = count_word(movies, 'genres', genre_labels)
-            trunc_occurences = keyword_occurences[0:50]
-            # lets display the same result in the histogram
-            fig= plt.figure(2,figsize = (60,40))
-            ax2 = fig.add_subplot(1,1,1)
-            y_axis = [i[1] for i in trunc_occurences]
-            x_axis = [k for k,i in enumerate(trunc_occurences)]
-            x_label = [i[0] for i in trunc_occurences]
-            plt.xticks(rotation=85, fontsize = 20)
-            plt.yticks(fontsize = 14)
-            plt.xticks(x_axis, x_label)
-            plt.xlabel('Genres', fontsize=30)
-            plt.ylabel("No. of occurences", fontsize = 50, labelpad = 0)
-            ax2.bar(x_axis, y_axis, align = 'center', color='g')
-            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 30)
-            st.pyplot()
+            st.markdown("This is a wordcloud for all the different genres in this Application.")
 
     if page_selection == "Hybrid Recommender System":
         st.image('resources/imgs/Image_header.png',use_column_width=True)

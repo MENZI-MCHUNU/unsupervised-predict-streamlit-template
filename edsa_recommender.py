@@ -292,11 +292,11 @@ def main():
             title_cast= ' '.join([text for text in imdb["title_cast"]])
 
             # Word cloud for the overall data checking out which words do people use more often
-            wordcloud = WordCloud(width=900, height=600,random_state=21,max_font_size=110).generate(title_cast)
+            wordcloud = WordCloud(width=1000, height=800).generate(title_cast)
 
             #ploting the word cloud
-            plt.figure(figsize=(16,8))
-            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.figure(figsize=(16,12))
+            plt.imshow(wordcloud)
             plt.axis('off')
             st.pyplot()  
 

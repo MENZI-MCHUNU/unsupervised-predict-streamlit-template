@@ -371,7 +371,7 @@ def main():
         st.markdown('On the left you will see a side bar that has all of the pages on this App.')
         st.image('recommenders/images/page5.png',width = 600)
         st.markdown('We have another page where we show you Actors , directors and how other people that watched the movies rate them.')
-        st.markdown('recommenders/images/page18.png',width = 600 )
+        st.image('recommenders/images/page18.png',width = 600 )
         st.markdown('This word cloud show the most popular Actors/Actresses on this movie App.')
         st.image('recommenders/images/page7.png',width = 600)
         st.markdown('This word cloud shows the different genres you can find on this App.')

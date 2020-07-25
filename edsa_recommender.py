@@ -336,8 +336,8 @@ def main():
             keyword_occurences, dum = count_word(movies, 'genres', genre_labels)
             trunc_occurences = keyword_occurences[0:50]
             # lets display the same result in the histogram
-            fig = plt.figure(1, figsize=(18,13))
-            ax2 = fig.add_subplot(2,1,2)
+            fig, ax2 = plt.figure( figsize=(18,13))
+            #ax2 = fig.add_subplot(2,1,2)
             y_axis = [i[1] for i in trunc_occurences]
             x_axis = [k for k,i in enumerate(trunc_occurences)]
             x_label = [i[0] for i in trunc_occurences]
@@ -345,9 +345,9 @@ def main():
             plt.yticks(fontsize = 14)
             plt.xticks(x_axis, x_label)
             plt.xlabel('Genres', fontsize=16)
-            plt.ylabel("No. of occurences", fontsize = 16, labelpad = 0)
+            plt.ylabel("No. of occurences", fontsize = 30, labelpad = 0)
             ax2.bar(x_axis, y_axis, align = 'center', color='g')
-            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 30)
+            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 80)
             st.pyplot()
 
     if page_selection == "Hybrid Recommender System":

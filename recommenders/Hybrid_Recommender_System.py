@@ -111,6 +111,7 @@ indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 def recommendation(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
+    st.write(movie)
     ind=indices[movie]
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))

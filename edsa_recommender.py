@@ -268,7 +268,7 @@ def main():
             directors = ' '.join([text for text in imdb["director"]])
 
             # Word cloud for the overall data checking out which words do people use more often
-            wordcloud = WordCloud(width=900, height=600,random_state=21,max_font_size=110).generate(directors)
+            wordcloud = WordCloud(width=1000, height=800,random_state=21,max_font_size=110).generate(directors)
 
             #ploting the word cloud
             plt.figure(figsize=(16,8))

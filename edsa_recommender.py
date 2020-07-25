@@ -299,7 +299,7 @@ def main():
             plt.axis('off')
             st.pyplot()  
 
-        if st.checkbox("Show wordcloud of different genres")    
+        if st.checkbox("Show wordcloud of different genres"):    
             movies = pd.read_csv('resources/data/movies.csv')
             #here we  make census of the genres:
             genre_labels = set()

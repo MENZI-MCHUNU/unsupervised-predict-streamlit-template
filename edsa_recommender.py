@@ -341,11 +341,11 @@ def main():
             y_axis = [i[1] for i in trunc_occurences]
             x_axis = [k for k,i in enumerate(trunc_occurences)]
             x_label = [i[0] for i in trunc_occurences]
-            plt.xticks(rotation=85, fontsize = 14)
+            plt.xticks(rotation=85, fontsize = 30)
             plt.yticks(fontsize = 14)
             plt.xticks(x_axis, x_label)
-            plt.xlabel('Genres', fontsize=16)
-            plt.ylabel("No. of occurences", fontsize = 30, labelpad = 0)
+            plt.xlabel('Genres', fontsize=30)
+            plt.ylabel("No. of occurences", fontsize = 50, labelpad = 0)
             ax2.bar(x_axis, y_axis, align = 'center', color='g')
             plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 80)
             st.pyplot()

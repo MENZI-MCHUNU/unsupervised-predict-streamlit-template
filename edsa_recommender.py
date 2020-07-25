@@ -361,7 +361,7 @@ def main():
     if page_selection == "Instruction of use":
         st.title("Instructions")
         st.markdown('When the application opens the first page you will see is the Recommender System Page. Here you will see two algorithms you can choose from.')
-        st.image('images/page1.png', width = 600)
+        st.image('recommenders/images/page1.png', width = 600)
         st.markdown('Then you will have three options to choose from. On the select box you will choose your three favourite movie and then press the Recommend button.')
         st.markdown('After pressing the Recommend button then the recommended movies will be shown to you.')
         st.markdown('Then you can choose the next algorithm to do the same task')

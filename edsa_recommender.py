@@ -41,6 +41,7 @@ from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
 from recommenders.Hybrid_Recommender_System import recommendation
+from recommenders.Exploratory_data_analysis import count_word
 import time
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
@@ -297,6 +298,32 @@ def main():
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
             st.pyplot()  
+
+        if st.checkbox("Show wordcloud of different genres")    
+            movies = pd.read_csv('resources/data/movies.csv')
+            #here we  make census of the genres:
+            genre_labels = set()
+            for s in movies['genres'].str.split('|').values:
+                genre_labels = genre_labels.union(set(s))  
+
+            #counting how many times each of genres occur:
+            keyword_occurences, dum = count_word(movies, 'genres', genre_labels)
+            #Finally, the result is shown as a wordcloud:
+            words = dict()
+            trunc_occurences = keyword_occurences[0:50]
+            for s in trunc_occurences:
+                words[s[0]] = s[1]
+            tone = 100 # define the color of the words
+            f, ax = plt.subplots(figsize=(14, 6))
+            wordcloud = WordCloud(width=550,height=300, background_color='white', 
+                                max_words=1628,relative_scaling=0.7,
+                                color_func = random_color_func,
+                                normalize_plurals=False)
+            wordcloud.generate_from_frequencies(words)
+            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.axis('off')
+            pyplot()
+
 
     if page_selection == "Hybrid Recommender System":
         st.image('resources/imgs/Image_header.png',use_column_width=True)

@@ -42,6 +42,7 @@ from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
 from recommenders.Hybrid_Recommender_System import recommendation
 from recommenders.Exploratory_data_analysis import count_word
+from recommenders.Exploratory_data_analysis import random_color_func
 import time
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')

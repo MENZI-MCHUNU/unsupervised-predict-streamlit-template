@@ -70,7 +70,7 @@ movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
 #Applying the strip function to get rid of any ending whitespace characters that may have appeared
 #movies['title'] = movies['title'].apply(lambda x: x.strip())
 
-movies.to_csv('hybrid_movies.csv')
+#movies.to_csv('hybrid_movies.csv')
 '''Applying the Cotent_Based Filtering'''
  #Applying Feature extraction 
 from sklearn.feature_extraction.text import TfidfVectorizer

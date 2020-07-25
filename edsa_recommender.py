@@ -356,11 +356,12 @@ def main():
         #user_Id = rating_m['userId'][:1000]
         #user_Id = rating_m['userId'].unique()
         #user_id1 = st.selectbox('Fisrt Option',user_Id[:1000])
-        title_list1 = load_movie_titles('recommenders/hybrid_movies.csv')
+        title_list1 = load_movie_titles('recommenders/hybrid_movies.csv', sep = ',',delimiter=',')
         #title_list1 = title_list1.unique()
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
         movie_1 = st.selectbox('Fisrt Option',title_list1[100:200])
+        st.write(movie_1)
         fav_movies = [movie_1]
         if st.button("Recommend"):
             #try:

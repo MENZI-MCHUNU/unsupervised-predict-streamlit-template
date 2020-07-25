@@ -271,8 +271,8 @@ def main():
             wordcloud = WordCloud(width=1000, height=800).generate(directors)
 
             #ploting the word cloud
-            plt.figure(figsize=(16,8))
-            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.figure(figsize=(16,12))
+            plt.imshow(wordcloud)
             plt.axis('off')
             st.pyplot() 
 

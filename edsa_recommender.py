@@ -117,7 +117,7 @@ def main():
     #Search for a Movie page
     if page_selection  =="Search for a Movie":
         st.title("Search for Movies")
-        st.markdown('Please Refer to the About Machine Learning Page to learn more about the techniques used to recommend movies. If you decide not to use the recommender system you can use this page to filter movies based on the rating of the movie , the year in which the movie was released and the genre of the movies. After you change the filter you will be left with movies that are specific to that filter used.Then when you scroll down you will see the movie name and the link to a youtube trailer of that movie. When you click the link ,you will see a page on youtube for that specific movie and you can watch the trailer and see if you like it. This is an alternative method to you if you are not satisfied with the recommender engine . Enjoy! ')
+        st.markdown('Please Refer to the About Machine Learning Page to learn more about the techniques used to recommend movies. If you decide not to use the recommender systems you can use this page to filter movies based on the rating of the movie , the year in which the movie was released and the genre of the movies. After you change the filter you will be left with movies that are specific to that filter used. Then when you scroll down you will see the movie name and the link to a youtube trailer of that movie. When you click the link ,you will see a page on youtube for that specific movie and you can watch the trailer and see if you like it. This is an alternative method to you if you are not satisfied with the recommender engine . Enjoy! ')
         # Movies
         df = pd.read_csv('resources/data/movies.csv')
         #min_year = int(df['Year'].min())
@@ -336,18 +336,18 @@ def main():
             keyword_occurences, dum = count_word(movies, 'genres', genre_labels)
             trunc_occurences = keyword_occurences[0:50]
             # lets display the same result in the histogram
-            fig = plt.figure(1, figsize=(40,33))
-            ax2 = fig.add_subplot(2,1,2)
+            fig, ax2= plt.figure()
+            #ax2 = fig.add_subplot(2,1,2)
             y_axis = [i[1] for i in trunc_occurences]
             x_axis = [k for k,i in enumerate(trunc_occurences)]
             x_label = [i[0] for i in trunc_occurences]
-            plt.xticks(rotation=85, fontsize = 30)
+            plt.xticks(rotation=85, fontsize = 20)
             plt.yticks(fontsize = 14)
             plt.xticks(x_axis, x_label)
             plt.xlabel('Genres', fontsize=30)
-            plt.ylabel("No. of occurences", fontsize = 50, labelpad = 0)
+            plt.ylabel("No. of occurences", fontsize = 30, labelpad = 0)
             ax2.bar(x_axis, y_axis, align = 'center', color='g')
-            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 80)
+            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 20)
             st.pyplot()
 
     if page_selection == "Hybrid Recommender System":

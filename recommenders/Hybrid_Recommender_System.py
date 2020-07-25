@@ -124,7 +124,7 @@ def recommendation(movie):
     movie_id=[i[0] for i in sim_scores]    
     print('The Movie You Should Watched Next Are --')
     print('ID ,   Name ,  Average Ratings , Year ')
-    st.write(movie_id)
+    #st.write(movie_id)
     #Varible to print only top 10 movies
     count=0
     for id in range(0,len(movie_id)):

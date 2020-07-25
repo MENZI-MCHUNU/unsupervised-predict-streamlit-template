@@ -25,7 +25,7 @@ def count_word(df, ref_col, lister):
     keyword_occurences.sort(key = lambda x:x[1], reverse = True)
     return keyword_occurences, keyword_count
 
-
+tone = 100
     
 # Function that control the color of the words
 def random_color_func(word=None, font_size=None, position=None,

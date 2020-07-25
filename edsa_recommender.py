@@ -360,7 +360,7 @@ def main():
         #title_list1 = title_list1.unique()
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',title_list1[100:200])
+        movie_1 = st.selectbox('Fisrt Option',title_list1[200:500])
         #st.write(movie_1)
         fav_movies = [movie_1]
         if st.button("Recommend"):

@@ -323,7 +323,7 @@ def main():
             wordcloud.generate_from_frequencies(words)
             plt.imshow(wordcloud, interpolation="bilinear")
             plt.axis('off')
-            pyplot()
+            st.pyplot()
 
 
     if page_selection == "Hybrid Recommender System":

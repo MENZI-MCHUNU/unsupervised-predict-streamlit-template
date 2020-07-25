@@ -361,11 +361,11 @@ def main():
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
         movie_1 = st.selectbox('Fisrt Option',title_list1[100:200])
-
+        fav_movies = [movie_1]
         if st.button("Recommend"):
             #try:
                 with st.spinner('Crunching the numbers...'):
-                    top_recommendations = recommendation(movie = movie_1)
+                    top_recommendations = recommendation(movie = fav_movies)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
                     st.subheader(str(i+1)+'. '+j)

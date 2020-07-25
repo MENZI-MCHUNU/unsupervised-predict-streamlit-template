@@ -370,7 +370,7 @@ def main():
                     st.write(top_recommendations)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
-                    st.subheader(str(i+1)+'. '+j)
+                    st.subheader(str(i[0]+1)+'. '+j)
 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

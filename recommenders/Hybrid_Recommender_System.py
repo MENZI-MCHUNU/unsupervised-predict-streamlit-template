@@ -18,7 +18,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 #importing the dataset
 movies = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/movies.csv', sep = ',',delimiter=',')
 ratings = pd.read_csv('~/unsupervised_data/unsupervised_movie_data/train.csv')
-movies = movies[:1000000]
+movies = movies[:900000]
 #movies =  movies.reset_index(drop=True)
 ratings = ratings.sample(frac=0.05)
 ratings =  ratings.reset_index(drop=True)

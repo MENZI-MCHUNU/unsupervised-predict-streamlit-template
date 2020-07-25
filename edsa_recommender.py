@@ -367,6 +367,7 @@ def main():
             #try:
                 with st.spinner('Crunching the numbers...'):
                     top_recommendations = recommendation(movie = fav_movies)
+                    st.write(top_recommendations)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
                     st.subheader(str(i+1)+'. '+j)

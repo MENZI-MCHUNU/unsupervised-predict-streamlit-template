@@ -111,7 +111,7 @@ def main():
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
         st.write("Describe your winning approach on this page")
-
+    
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     #Search for a Movie page
@@ -356,6 +356,22 @@ def main():
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
                     st.write(str(i+1),j)
+
+
+    if page_selection == "Instruction of use":
+        st.title("Instructions")
+        st.markdown('When the application opens the first page you will see is the Recommender System Page. Here you will see two algorithms you can choose from.')
+        st.image('images/page1.png', width = 600)
+        st.markdown('Then you will have three options to choose from. On the select box you will choose your three favourite movie and then press the Recommend button.')
+        st.markdown('After pressing the Recommend button then the recommended movies will be shown to you.')
+        st.markdown('Then you can choose the next algorithm to do the same task')
+        st.markdown('On the left you will see a side bar that has all of the pages on this App')
+        st.markdown('We have another page where we show you Actors , directors and how other people that watched the movies rate them.')
+        st.markdown('This word cloud show the most popular Actors/Actresses on this movie App.')
+        st.markdown('This word cloud shows the different genres you can find on this App.')
+        st.markdown('The Search for a Movie page is an alternative to search for movies using filters instead of using Recommender Systems . The filters you can use are the release year of a movie, the rating of a movie and the genre of a movie and this will allow you to play around and find a specific movie using filters.')
+        st.markdown('Whe you scroll down this page you will see that as you change the movie name and a link . The link is a youtube movie trailer for that movie.')
+        st.markdown('Then when you click the link it will take you to the youtube page for the trailer of that movie.')
 
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

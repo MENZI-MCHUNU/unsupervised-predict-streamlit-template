@@ -326,6 +326,29 @@ def main():
             plt.axis('off')
             st.pyplot()
 
+        if st.checkbox("Show dustribution of Genres"):
+            movies = pd.read_csv('resources/data/movies.csv')
+            #here we  make census of the genres:
+            genre_labels = set()
+            for s in movies['genres'].str.split('|').values:
+                genre_labels = genre_labels.union(set(s))            
+            #counting how many times each of genres occur:
+            keyword_occurences, dum = count_word(movies, 'genres', genre_labels)
+            trunc_occurences = keyword_occurences[0:50]
+            # lets display the same result in the histogram
+            fig = plt.figure(1, figsize=(18,13))
+            ax2 = fig.add_subplot(2,1,2)
+            y_axis = [i[1] for i in trunc_occurences]
+            x_axis = [k for k,i in enumerate(trunc_occurences)]
+            x_label = [i[0] for i in trunc_occurences]
+            plt.xticks(rotation=85, fontsize = 14)
+            plt.yticks(fontsize = 14)
+            plt.xticks(x_axis, x_label)
+            plt.xlabel('Genres', fontsize=16)
+            plt.ylabel("No. of occurences", fontsize = 16, labelpad = 0)
+            ax2.bar(x_axis, y_axis, align = 'center', color='g')
+            plt.title("Distribution of Genres",bbox={'facecolor':'k', 'pad':5},color='w',fontsize = 30)
+            st.pyplot()
 
     if page_selection == "Hybrid Recommender System":
         st.image('resources/imgs/Image_header.png',use_column_width=True)

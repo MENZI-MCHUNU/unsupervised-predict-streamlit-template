@@ -111,11 +111,11 @@ indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 def recommendation(movie_list,top_n):
     result=[]
     #Getting the id of the movie for which the user want recommendation
-    st.write(movie_list[0])
-    st.write(movie_list[1])
-    st.write(movie_list[2])
-    st.write(indices[movie_list[1]])
-    st.write(indices[movie_list[0]].iloc[0])
+    #st.write(movie_list[0])
+    #st.write(movie_list[1])
+    #st.write(movie_list[2])
+    #st.write(indices[movie_list[1]])
+    #st.write(indices[movie_list[0]].iloc[0])
     ind=indices[movie_list[0]].iloc[0]
     ind1=indices[movie_list[1]]
     ind2=indices[movie_list[2]].iloc[0]

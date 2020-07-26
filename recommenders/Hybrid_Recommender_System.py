@@ -121,11 +121,10 @@ def recommendation(movie_list,top_n):
     st.write(indices[movie_list[2]].tolist())        
     #st.write(indices[movie_list[1]].unique().tolist())
     #st.write(indices[movie_list[2]].unique().tolist())
-    ind=indices[movie_list[0]].loc[movie_list[0]]
-    ind1=indices[movie_list[1]]#.loc[movie_list[1]]
-    ind2=indices[movie_list[2]].loc[movie_list[2]]
-    #np.where(v == maximum)
-    #st.write(ind)
+    ind=indices[movie_list[0]].tolist()#indices[movie_list[0]].loc[movie_list[0]]
+    ind1=indices[movie_list[1]].tolist()#indices[movie_list[1]]#.loc[movie_list[1]]
+    ind2=indices[movie_list[2]].tolist()#indices[movie_list[2]].loc[movie_list[2]]
+
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))
     sim_scores1=list(enumerate(cosine_sim[ind1]))

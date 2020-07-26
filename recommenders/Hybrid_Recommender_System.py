@@ -115,8 +115,9 @@ def recommendation(movie_list,top_n):
     st.write(movie_list[0])
     st.write(movie_list[1])
     st.write(movie_list[2])
+    st.write(indices[movie_list[1]])
     ind=indices[movie_list[0]].iloc[0]
-    ind1=indices[movie_list[1]].index
+    ind1=indices[movie_list[1]]
     ind2=indices[movie_list[2]].iloc[0]
     #np.where(v == maximum)
     #st.write(ind)

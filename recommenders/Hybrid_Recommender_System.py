@@ -107,7 +107,6 @@ svd.fit(training)
 movies_dataset = movies.reset_index()
 titles = movies_dataset['title']
 indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
-indices1 = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 #Function to make recommendation to the user
 def recommendation(movie_list,top_n):
     result=[]
@@ -116,6 +115,7 @@ def recommendation(movie_list,top_n):
     st.write(movie_list[1])
     st.write(movie_list[2])
     st.write(indices[movie_list[1]])
+    st.write(indices[movie_list[0]].iloc[0])
     ind=indices[movie_list[0]].iloc[0]
     ind1=indices[movie_list[1]]
     ind2=indices[movie_list[2]].iloc[0]

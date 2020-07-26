@@ -355,8 +355,8 @@ def main():
                     st.write(top_recommendations)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
-                    st.write(str(i+1),j)
-
+                    #st.write(str(i+1),j)
+                    st.subheader(str(i+1)+'. '+j)
 
     if page_selection == "Instruction of use":
         st.title("Instructions")

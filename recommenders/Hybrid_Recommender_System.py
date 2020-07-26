@@ -134,7 +134,7 @@ def recommendation(movie_list,top_n):
     sim_scores_1 =sim_scores +sim_scores1+ sim_scores2 #sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
     #st.write(sim_scores)
     #Sorting the list obtained
-    sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    
+    sim_scores=sorted(sim_scores,key=lambda x:x[1],reverse=True)    
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]    
     print('The Movie You Should Watched Next Are --')

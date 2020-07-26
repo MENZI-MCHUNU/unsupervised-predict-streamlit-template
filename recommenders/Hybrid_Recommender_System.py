@@ -108,7 +108,7 @@ movies_dataset = movies.reset_index()
 titles = movies_dataset['title']
 indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 #Function to make recommendation to the user
-def recommendation(movie):
+def recommendation(movie,top_n):
     result=[]
     #Getting the id of the movie for which the user want recommendation
     st.write(movie[0])
@@ -136,8 +136,8 @@ def recommendation(movie):
             if(avg_ratings >1.5):
                 count+=1
                 print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
-                result.append([titles[movie_id[id]],avg_ratings])
-            if(count >=10):
+                result.append([titles[movie_id[id]]])#,avg_ratings])
+            if(count >=top_n):
                     break
     
     print('Wait!! i am telling your recommendation')

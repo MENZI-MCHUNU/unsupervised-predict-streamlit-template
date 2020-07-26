@@ -351,7 +351,7 @@ def main():
         if st.button("Recommend"):
             #try:
                 with st.spinner('Crunching the numbers...'):
-                    top_recommendations = recommendation(movie = fav_movies)
+                    top_recommendations = recommendation(movie = fav_movies, top_n = 10)
                     st.write(top_recommendations)
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):

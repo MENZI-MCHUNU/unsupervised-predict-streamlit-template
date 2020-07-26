@@ -116,9 +116,20 @@ def recommendation(movie_list,top_n):
     #st.write(movie_list[2])
     #st.write(indices[movie_list[1]])
     #st.write(indices[movie_list[0]].iloc[0])
-    st.write(indices[movie_list[0]].unique().tolist())
-    st.write(indices[movie_list[1]].unique().tolist())
-    st.write(indices[movie_list[2]].unique().tolist())
+    if len(indices[movie_list[0]]) >1 :
+        st.write(indices[movie_list[0]].unique().tolist())
+    elif len(indices[movie_list[0]]) == 1:
+        st.write(indices[movie_list[0]].tolist())
+    if len(indices[movie_list[1]]) >1 :
+        st.write(indices[movie_list[1]].unique().tolist())
+    elif len(indices[movie_list[1]]) == 1:
+        st.write(indices[movie_list[1]].tolist())
+    if len(indices[movie_list[2]]) >1 :
+        st.write(indices[movie_list[2]].unique().tolist())
+    elif len(indices[movie_list[2]]) == 1:
+        st.write(indices[movie_list[2]].tolist())        
+    #st.write(indices[movie_list[1]].unique().tolist())
+    #st.write(indices[movie_list[2]].unique().tolist())
     ind=indices[movie_list[0]].loc[movie_list[0]]
     ind1=indices[movie_list[1]]#.loc[movie_list[1]]
     ind2=indices[movie_list[2]].loc[movie_list[2]]

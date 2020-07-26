@@ -159,6 +159,7 @@ def recommendation(movie_list,top_n):
                 count+=1
                 print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
                 result.append(titles[movie_id[id]])#,avg_ratings])
+                result = list(set(result))
             if(count >=top_n):
                     break
     

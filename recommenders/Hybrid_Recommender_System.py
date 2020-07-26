@@ -98,9 +98,9 @@ rating_dataset = Dataset.load_from_df(ratings[['userId','movieId','rating']],rea
 svd=SVD(n_factors=25)
 
 #making the dataset to train our model
-train = rating_dataset.build_full_trainset()
+training = rating_dataset.build_full_trainset()
 #training our model
-svd.fit(train)
+svd.fit(training)
 
 #Making a new series which have two columns in it 
 #Movie name and movie id 
@@ -112,7 +112,7 @@ def recommendation(movie):
     result=[]
     #Getting the id of the movie for which the user want recommendation
     st.write(movie[0])
-    ind=indices[indices == movie[0]].index
+    ind=indices[movie[0]].iloc[0]
     #np.where(v == maximum)
     st.write(ind)
     #Getting all the similar cosine score for that movie

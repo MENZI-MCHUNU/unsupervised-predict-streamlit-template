@@ -116,8 +116,9 @@ def recommendation(movie_list,top_n):
     #st.write(movie_list[2])
     #st.write(indices[movie_list[1]])
     #st.write(indices[movie_list[0]].iloc[0])
-    st.write(indices[movie_list[1]])
-    st.write(indices[movie_list[2]].loc[movie_list[2]])
+    st.write(indices[movie_list[0]].loc[movie_list[0]].index)
+    st.write(indices[movie_list[1]].index)
+    st.write(indices[movie_list[2]].loc[movie_list[2]].index)
     ind=indices[movie_list[0]].loc[movie_list[0]]
     ind1=indices[movie_list[1]]#.loc[movie_list[1]]
     ind2=indices[movie_list[2]].loc[movie_list[2]]
@@ -127,7 +128,7 @@ def recommendation(movie_list,top_n):
     sim_scores=list(enumerate(cosine_sim[ind]))
     sim_scores1=list(enumerate(cosine_sim[ind1]))
     sim_scores2=list(enumerate(cosine_sim[ind2]))
-
+    st.write(sim_scores)
     # Calculating the scores
     score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
     score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)

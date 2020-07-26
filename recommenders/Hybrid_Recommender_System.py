@@ -113,13 +113,24 @@ def recommendation(movie,top_n):
     #Getting the id of the movie for which the user want recommendation
     st.write(movie[0])
     ind=indices[movie[0]].iloc[0]
+    ind1=indices[movie[1]].iloc[0]
+    ind2=indices[movie[2]].iloc[0]
     #np.where(v == maximum)
-    st.write(ind)
+    #st.write(ind)
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))
+    sim_scores1=list(enumerate(cosine_sim[ind1]))
+    sim_scores2=list(enumerate(cosine_sim[ind2]))
+
+    # Calculating the scores
+    score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
+    score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
+    score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
+
+    sim_scores_1 = score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
     #st.write(sim_scores)
     #Sorting the list obtained
-    sim_scores=sorted(sim_scores,key=lambda x:x[1],reverse=True)    
+    sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]    
     print('The Movie You Should Watched Next Are --')

@@ -56,9 +56,9 @@ def explode(df, lst_cols, fill_value='', preserve_index=False):
     return res
 
  
-movies1=movies.copy()
-movies1.genres = movies1.genres.str.split('|')
-movies = explode(movies1, ['genres'])  
+#movies1=movies.copy()
+movies.genres = movies.genres.str.replace('|', ' ')
+#movies = movies1# (movies1, ['genres'])  
 
 
 movies['year'] = movies.title.str.extract('(\(\d\d\d\d\))',expand=False)

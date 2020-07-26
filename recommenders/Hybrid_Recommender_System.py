@@ -116,9 +116,9 @@ def recommendation(movie_list,top_n):
     #st.write(movie_list[2])
     #st.write(indices[movie_list[1]])
     #st.write(indices[movie_list[0]].iloc[0])
-    ind=indices[movie_list[0]]#.iloc[0]
-    ind1=indices[movie_list[1]]#.iloc[0]
-    ind2=indices[movie_list[2]]#.iloc[0]
+    ind=indices[movie_list[0]].loc[movie_list[0]]
+    ind1=indices[movie_list[1]].loc[movie_list[1]]
+    ind2=indices[movie_list[2]].loc[movie_list[2]]
     #np.where(v == maximum)
     #st.write(ind)
     #Getting all the similar cosine score for that movie
@@ -127,14 +127,14 @@ def recommendation(movie_list,top_n):
     sim_scores2=list(enumerate(cosine_sim[ind2]))
 
     # Calculating the scores
-    #score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
-    #score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
-    #score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
+    score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
+    score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
+    score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
 
-    sim_scores_1 =sim_scores +sim_scores1+ sim_scores2 #sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
+    sim_scores_1 =sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
     #st.write(sim_scores)
     #Sorting the list obtained
-    sim_scores=sorted(sim_scores,key=lambda x:x[1],reverse=True)    
+    sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]    
     print('The Movie You Should Watched Next Are --')

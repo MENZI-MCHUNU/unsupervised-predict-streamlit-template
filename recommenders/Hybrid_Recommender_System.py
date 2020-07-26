@@ -133,7 +133,7 @@ def recommendation(movie,top_n):
             rating=ratings[ratings['movieId']==movie_id[id]]['rating']
             avg_ratings=round(np.mean(rating),2)
             #To print only thoese movies which have an average ratings that is more than 3.5
-            if(avg_ratings >1.5):
+            if(avg_ratings >3.5):
                 count+=1
                 print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
                 result.append([titles[movie_id[id]]])#,avg_ratings])

@@ -127,11 +127,11 @@ def recommendation(movie_list,top_n):
     sim_scores2=list(enumerate(cosine_sim[ind2]))
 
     # Calculating the scores
-    score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
-    score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
-    score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
+    #score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
+    #score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
+    #score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
 
-    sim_scores_1 = sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
+    sim_scores_1 =sim_scores +sim_scores1+ sim_scores2 #sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
     #st.write(sim_scores)
     #Sorting the list obtained
     sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    

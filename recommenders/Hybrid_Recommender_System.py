@@ -117,15 +117,15 @@ def recommendation(movie_list,top_n):
     #st.write(indices[movie_list[1]])
     #st.write(indices[movie_list[0]].iloc[0])
     if len(indices[movie_list[0]]) >1 :
-        st.write(indices[movie_list[0]].unique().tolist())
+        st.write(indices[movie_list[0]].unique().tolist()[0])
     elif len(indices[movie_list[0]]) == 1:
         st.write(indices[movie_list[0]].tolist())
     if len(indices[movie_list[1]]) >1 :
-        st.write(indices[movie_list[1]].unique().tolist())
+        st.write(indices[movie_list[1]].unique().tolist()[0])
     elif len(indices[movie_list[1]]) == 1:
         st.write(indices[movie_list[1]].tolist())
     if len(indices[movie_list[2]]) >1 :
-        st.write(indices[movie_list[2]].unique().tolist())
+        st.write(indices[movie_list[2]].unique().tolist()[0])
     elif len(indices[movie_list[2]]) == 1:
         st.write(indices[movie_list[2]].tolist())        
     #st.write(indices[movie_list[1]].unique().tolist())

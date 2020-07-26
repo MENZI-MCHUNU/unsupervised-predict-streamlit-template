@@ -151,7 +151,7 @@ def recommendation(movie_list,top_n):
     count=0
     for id in range(0,len(movie_id)):
       #to ensure that the movie entered by the user is doesnot come in his/her recommendation
-        if(ind != movie_id[id]):
+        if((ind != movie_id[id])&(ind1 !=movie_id[id])&(ind2 !=movie_id[id])):
             rating=ratings[ratings['movieId']==movie_id[id]]['rating']
             avg_ratings=round(np.mean(rating),2)
             #To print only thoese movies which have an average ratings that is more than 3.5

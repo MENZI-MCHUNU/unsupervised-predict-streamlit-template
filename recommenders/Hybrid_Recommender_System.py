@@ -137,7 +137,7 @@ def recommendation(movie_list,top_n):
     st.write(score_series_1)
     st.write(score_series_2)
     st.write(score_series_3)
-    sim_scores_1 =score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
+    sim_scores_1 =score_series_1.append(score_series_1).append(score_series_3).sort_values(ascending = False)
     st.write(sim_scores_1)
     #Sorting the list obtained
     sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    

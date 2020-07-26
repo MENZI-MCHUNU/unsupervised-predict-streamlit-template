@@ -113,7 +113,7 @@ def recommendation(movie,top_n):
     #Getting the id of the movie for which the user want recommendation
     st.write(movie[0])
     ind=indices[movie[0]].iloc[0]
-    ind1=indices[movie[1]].iloc[0]
+    ind1=indices[movie[1]].iloc[1]
     ind2=indices[movie[2]].iloc[0]
     #np.where(v == maximum)
     #st.write(ind)

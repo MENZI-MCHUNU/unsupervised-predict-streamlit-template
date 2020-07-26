@@ -134,18 +134,14 @@ def recommendation(movie_list,top_n):
     score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
     score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
     score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
-    st.write(score_series_1)
-    st.write(score_series_2)
-    st.write(score_series_3)
+
     sim_scores_1 =score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
-    st.write(sim_scores_1)
     #Sorting the list obtained
     sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]
-    st.write(movie_id)
-    print('The Movie You Should Watched Next Are --')
-    print('ID ,   Name ,  Average Ratings , Year ')
+    #print('The Movie You Should Watched Next Are --')
+    #print('ID ,   Name ,  Average Ratings , Year ')
     #st.write(movie_id)
     #Varible to print only top 10 movies
     count=0
@@ -156,8 +152,8 @@ def recommendation(movie_list,top_n):
             avg_ratings=round(np.mean(rating),2)
             #To print only thoese movies which have an average ratings that is more than 3.5
             if(avg_ratings >3.5):
-                count+=1
-                print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
+                #count+=1
+                #print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
                 result.append(titles[movie_id[id]])#,avg_ratings])
                 result = list(set(result))
             if(len(result) >=top_n):

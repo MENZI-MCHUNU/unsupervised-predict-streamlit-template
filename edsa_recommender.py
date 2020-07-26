@@ -350,7 +350,7 @@ def main():
         movie_3 = st.selectbox('Third Option',title_list1[2000:2300])
         fav_movies = [movie_1,movie_2,movie_3]
         #st.write(movie_1)
-        fav_movies = [movie_1]
+        #fav_movies = [movie_1]
         if st.button("Recommend"):
             #try:
                 with st.spinner('Crunching the numbers...'):

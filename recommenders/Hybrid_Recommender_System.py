@@ -131,7 +131,7 @@ def recommendation(movie_list,top_n):
     score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
     score_series_3 = pd.Series(sim_scores2).sort_values(ascending = False)
 
-    sim_scores_1 = score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
+    sim_scores_1 = sim_scores.append(sim_scores1).append(sim_scores2).sort_values(ascending = False)
     #st.write(sim_scores)
     #Sorting the list obtained
     sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    

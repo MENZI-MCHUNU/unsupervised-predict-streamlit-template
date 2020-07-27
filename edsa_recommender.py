@@ -123,7 +123,9 @@ def main():
         st.markdown('The main approach is to rely on hybrid recommenders, in order to mitigate the disadvantages of one category or model by combining it with another.', unsafe_allow_html=True) 
         st.markdown('We use the RMSE to measure how accurate our model is when recommending movies for users.')     
         st.markdown('Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors). Residuals are a measure of how far from the regression line data points are; RMSE is a measure of how spread out these residuals are. In other words, it tells you how concentrated the data is around the line of best fit.', unsafe_allow_html=True)  
-
+        st.markdown('The Hybrid Recommender Sytem gives the following RMSE')
+        st.markdown('<strong>RMSE:</strong> 0.9462',unsafe_allow_html=True)
+        st.markdown('The calculation of the RMSE can be found on the notebook in this Repository. The notebook name is Solution Overview.')
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     #Search for a Movie page

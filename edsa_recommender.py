@@ -404,7 +404,7 @@ def main():
         st.markdown('Starring : Vin Diesel, Eiza González ,Sam Heughan, Toby Kebbell')
         st.markdown("Plot : After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine-'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought. ")
         st.markdown("<a href='https://www.netflix.com/za/'><img src='resources/imgs/download.png'></a>", unsafe_allow_html=True)
-        st.markdown("[<img src = 'resources/imgs/download.png'>](https://www.netflix.com/za/)", unsafe_allow_html=True)#[![this is an image link](upload://7FxfXwDqJIZdYJ2QYADywvNRjB.png)](https://streamlit.io)
+        st.markdown("[<img src=resources/imgs/download.png>](https://www.netflix.com/za/)", unsafe_allow_html=True)#[![this is an image link](upload://7FxfXwDqJIZdYJ2QYADywvNRjB.png)](https://streamlit.io)
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.image('resources/imgs/star-wars-rise-of-skywalker-header.jpg',width = 600)

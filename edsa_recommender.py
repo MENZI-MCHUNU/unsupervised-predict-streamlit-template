@@ -381,10 +381,17 @@ def main():
 
     if page_selection == "new movie release":
         st.title("New movie release ")
+        st.subheader("The Old Guard")
         st.video('https://www.youtube.com/watch?v=aK-X2d0lJ_s')
-        st.markdown("Director :	Gina Prince-Bythewood")
+        st.markdown("Directed by :	Gina Prince-Bythewood")
         st.markdown("Starring : Charlize Theron, KiKi Layne, Marwan Kenzari, Luca Marinelli ,Harry Melling ")
         st.markdown("Plot : Led by a warrior named Andy (Charlize Theron), a covert group of tight-knit mercenaries with a mysterious inability to die have fought to protect the mortal world for centuries. But when the team is recruited to take on an emergency mission and their extraordinary abilities are suddenly exposed, it's up to Andy and Nile (Kiki Layne), the newest soldier to join their ranks, to help the group eliminate the threat of those who seek to replicate and monetize their power by any means necessary.")
+        st.markdown("")
+        st.subheader("Bad Boys For Life (2020)")
+        st.video('https://www.youtube.com/watch?v=jKCj3XuPG8M')
+        st.markdown('Directed by :	Adil & Bilall')
+        st.markdown('Starring : Will Smith, Martin Lawrence, Paola Núñez, Vanessa Hudgens, Alexander Ludwig, Charles Melton, Jacob Scipio')
+        st.markdown('Plot : Marcus and Mike have to confront new issues (career changes and midlife crises), as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel')
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

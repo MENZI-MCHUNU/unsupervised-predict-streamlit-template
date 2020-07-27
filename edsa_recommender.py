@@ -407,7 +407,7 @@ def main():
         st.markdown("[<img src=resources/imgs/download.png>](https://www.netflix.com/za/)", unsafe_allow_html=True)#[![this is an image link](upload://7FxfXwDqJIZdYJ2QYADywvNRjB.png)](https://streamlit.io)
         st.markdown('[<img src="resources/imgs/download.png"/>](https://www.netflix.com/za/)', unsafe_allow_html=True)
         st.markdown('[[<img src="resources/imgs/download.png"/>](<img src="resources/imgs/download.png"/>)](https://www.netflix.com/za/)', unsafe_allow_html=True)
-        st.image('resources/imgs/download.png',width = 600)
+        st.image('resources/imgs/download.png',width = 600)(https://www.netflix.com/za/)
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.image('resources/imgs/star-wars-rise-of-skywalker-header.jpg',width = 600)

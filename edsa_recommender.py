@@ -406,8 +406,8 @@ def main():
         st.markdown("<a href='https://www.netflix.com/za/'><img src='resources/imgs/download.png'></a>", unsafe_allow_html=True)
         st.markdown("[<img src=resources/imgs/download.png>](https://www.netflix.com/za/)", unsafe_allow_html=True)#[![this is an image link](upload://7FxfXwDqJIZdYJ2QYADywvNRjB.png)](https://streamlit.io)
         st.markdown('[(resources/imgs/download.png)](https://www.netflix.com/za/)')
-        st.markdown('[(resources/imgs/download.png)](https://www.netflix.com/za/)', unsafe_allow_html=True)
-        st.image('[(resources/imgs/download.png)](https://www.netflix.com/za/)',width = 600)
+        st.markdown('(resources/imgs/download.png)(https://www.netflix.com/za/)', unsafe_allow_html=True)
+
         #[![this is an image link](upload://7FxfXwDqJIZdYJ2QYADywvNRjB.png)](https://streamlit.io)
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

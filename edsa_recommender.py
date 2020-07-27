@@ -384,7 +384,9 @@ def main():
         st.image('recommenders/images/page15.png',width = 600)
 
     if page_selection == "new movie release":
+        st.image('resources/imgs/ws_The_Avengers_Silhouettes_1680x1050.jpg',width = 600)
         st.title("New movie release ")
+        st.markdown('You will find all new movie releases here . Enjoy!')
         st.subheader("The Old Guard")
         st.video('https://www.youtube.com/watch?v=aK-X2d0lJ_s')
         st.markdown("Directed by :	Gina Prince-Bythewood")

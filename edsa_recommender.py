@@ -111,7 +111,17 @@ def main():
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
         st.write("Describe your winning approach on this page")
-        st.markdown('')
+        st.markdown('On this Application you will find three methods to recommend movies to users, namely Content-Based filtering , Collaborative filtering and hybrid approach. A Hybrid approach is a combination of Content-Based filtering and collaborative filtering which the reason it works better than the individual approaches.\
+                     Both Content-Based filtering and Collaborative filtering suffer from what we call a <strong>Cold start problem</strong>. A Cold start is a potential problem in computer-based information systems which involve a degree of automated data modelling. Specifically, it concerns the issue that the system cannot draw any inferences for users or items about which it has not yet gathered sufficient information.\
+                     The item cold-start problem refers to when items added to the catalogue have either none or very little interactions. This constitutes a problem mainly for <strong>collaborative filtering algorithms</strong> due to the fact that they rely on the item\'s interactions to make recommendations. If no interactions are available then a pure collaborative algorithm cannot recommend the item.\
+                     In case only a few interactions are available, although a collaborative algorithm will be able to recommend it, the quality of those recommendations will be poor.\
+                     Content-based algorithms relying on user provided features suffer from the cold-start item problem as well, since for new items if no (or very few) interactions exist, also no (or very few) user reviews and tags will be available.\
+                        ')
+        st.markdown('When a new user enrolls in the system and for a certain period of time the recommender has to provide recommendation without relying on the user\'s past interactions, since none has occurred yet.\
+                    This problem is of particular importance when the recommender is part of the service offered to users, since a user who is faced with recommendations of poor quality might soon decide to stop using the system before providing enough interaction to allow the recommender to understand his/her interests.\
+                    The main strategy in dealing with new users is to ask them to provide some preferences to build an initial user profile. A threshold has to be found between the length of the user registration process, which if too long might indice too many users to abandon it, and the amount of initial data required for the recommender to work properly.') 
+        st.markdown('The main approach is to rely on hybrid recommenders, in order to mitigate the disadvantages of one category or model by combining it with another.') 
+        st.markdown('Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors). Residuals are a measure of how far from the regression line data points are; RMSE is a measure of how spread out these residuals are. In other words, it tells you how concentrated the data is around the line of best fit.')                         
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     #Search for a Movie page
@@ -120,23 +130,7 @@ def main():
         st.markdown('Please Refer to the About Machine Learning Page to learn more about the techniques used to recommend movies. If you decide not to use the recommender systems you can use this page to filter movies based on the rating of the movie , the year in which the movie was released and the genre of the movies. After you change the filter you will be left with movies that are specific to that filter used. Then when you scroll down you will see the movie name and the link to a youtube trailer of that movie. When you click the link ,you will see a page on youtube for that specific movie and you can watch the trailer and see if you like it. This is an alternative method to you if you are not satisfied with the recommender engine . Enjoy! ')
         # Movies
         df = pd.read_csv('resources/data/movies.csv')
-        #min_year = int(df['Year'].min())
-        #max_year = int(df['Year'].max())
-        #countries = df['Country Name'].unique()
-        #'## By country'
-        #country = st.selectbox('Country', countries)
-        #df[df['Country Name'] == country]
-        #movie_title = df['title'].unique()
-        #title = st.selectbox('title', movie_title)
-        ##################################################################################
-        #movies_df[‘year’] = movies_df.title.str.extract(‘(\(\d\d\d\d\))’,expand=False)
-        #Removing the parentheses
-        #movies_df[‘year’] = movies_df.year.str.extract(‘(\d\d\d\d)’,expand=False)
-        #Removing the years from the ‘title’ column
-        #movies_df[‘title’] = movies_df.title.str.replace(‘(\(\d\d\d\d\))’, ‘’)
-        #Applying the strip function to get rid of any ending whitespace characters that may have appeared
-        #movies_df[‘title’] = movies_df[‘title’].apply(lambda x: x.strip())
-        #########################################################################################
+
         def explode(df, lst_cols, fill_value='', preserve_index=False):
             import numpy as np
              # make sure `lst_cols` is list-alike
@@ -170,13 +164,11 @@ def main():
             return res  
 
         movie_data = pd.merge(rating_m, df, on='movieId')
-        #movie_data['timestamp'] = movie_data['timestamp'].apply(lambda x: time.strftime('%Y', time.localtime(x)))
         movie_data['year'] = movie_data.title.str.extract('(\(\d\d\d\d\))',expand=False)
         #Removing the parentheses
         movie_data['year'] = movie_data.year.str.extract('(\d\d\d\d)',expand=False)
-        #movie_year = st.sidebar.slider("Pick the Year",1995,2019)
+
         movie_data.genres = movie_data.genres.str.split('|')
-        #movie_title = movie_data['rating'].unique()
         movie_rating = st.sidebar.number_input("Pick a rating ",0.5,5.0, step=0.5)
 
         movie_data = explode(movie_data, ['genres'])
@@ -336,18 +328,15 @@ def main():
             st.markdown("This is a wordcloud for all the different genres in this Application.")
 
     if page_selection == "Hybrid Recommender System":
+        st.title('Hybrid Recommender System')
         st.image('resources/imgs/Image_header.png',use_column_width=True)
-        #st.write('### Enter Your User Id')
-        #user_Id = rating_m['userId'][:1000]
-        #user_Id = rating_m['userId'].unique()
-        #user_id1 = st.selectbox('Fisrt Option',user_Id[:1000])
+
         title_list1 = load_movie_titles('recommenders/hybrid_movies.csv')
-        #title_list1 = title_list1.unique()
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('Fisrt Option',title_list1[200:500])
-        movie_2 = st.selectbox('Second Option',title_list1[700:1000])
-        movie_3 = st.selectbox('Third Option',title_list1[2000:2300])
+        movie_1 = st.selectbox('Fisrt Option',title_list1[200:470])
+        movie_2 = st.selectbox('Second Option',title_list1[700:900])
+        movie_3 = st.selectbox('Third Option',title_list1[2000:2100])
         fav_movies = [movie_1,movie_2,movie_3]
         #st.write(movie_1)
         #fav_movies = [movie_1]
@@ -355,10 +344,9 @@ def main():
             #try:
                 with st.spinner('Crunching the numbers...'):
                     top_recommendations = recommendation(fav_movies, top_n = 10)
-                    #st.write(top_recommendations)
+
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
-                    #st.write(str(i+1),j)
                     st.subheader(str(i+1)+'. '+j)
 
     if page_selection == "Instruction of use":

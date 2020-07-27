@@ -56,19 +56,13 @@ def explode(df, lst_cols, fill_value='', preserve_index=False):
     return res
 
  
-#movies1=movies.copy()
 movies.genres = movies.genres.str.replace('|', ' ')
-#movies = movies1# (movies1, ['genres'])  
+
 
 
 movies['year'] = movies.title.str.extract('(\(\d\d\d\d\))',expand=False)
 #Removing the parentheses
 movies['year'] = movies.year.str.extract('(\d\d\d\d)',expand=False)
-#Removing the years from the title column
-#movies['title'] = movies.title.str.replace('(\(\d\d\d\d\))', '')
-
-#Applying the strip function to get rid of any ending whitespace characters that may have appeared
-#movies['title'] = movies['title'].apply(lambda x: x.strip())
 
 movies.to_csv('hybrid_movies.csv')
 '''Applying the Cotent_Based Filtering'''
@@ -111,25 +105,14 @@ indices = pd.Series(movies_dataset.index, index=movies_dataset['title'])
 def recommendation(movie_list,top_n):
     result=[]
     #Getting the id of the movie for which the user want recommendation
-    #st.write(movie_list[0])
-    #st.write(movie_list[1])
-    #st.write(movie_list[2])
-    #st.write(indices[movie_list[1]])
-    #st.write(indices[movie_list[0]].iloc[0])
-    st.write(indices[movie_list[0]].tolist())
-    st.write(indices[movie_list[1]].tolist())
-    st.write(indices[movie_list[2]].tolist())        
-    #st.write(indices[movie_list[1]].unique().tolist())
-    #st.write(indices[movie_list[2]].unique().tolist())
-    ind=indices[movie_list[0]].tolist()#indices[movie_list[0]].loc[movie_list[0]]
-    ind1=indices[movie_list[1]].tolist()#indices[movie_list[1]]#.loc[movie_list[1]]
-    ind2=indices[movie_list[2]].tolist()#indices[movie_list[2]].loc[movie_list[2]]
+    ind=indices[movie_list[0]].tolist()
+    ind1=indices[movie_list[1]].tolist()
+    ind2=indices[movie_list[2]].tolist()
 
     #Getting all the similar cosine score for that movie
     sim_scores=list(enumerate(cosine_sim[ind]))
     sim_scores1=list(enumerate(cosine_sim[ind1]))
     sim_scores2=list(enumerate(cosine_sim[ind2]))
-    #st.write(sim_scores)
     # Calculating the scores
     score_series_1 = pd.Series(sim_scores).sort_values(ascending = False)
     score_series_2 = pd.Series(sim_scores1).sort_values(ascending = False)
@@ -140,9 +123,6 @@ def recommendation(movie_list,top_n):
     sim_scores=sorted(sim_scores_1,key=lambda x:x[1],reverse=True)    
     #Getting all the id of the movies that are related to the movie Entered by the user
     movie_id=[i[0] for i in sim_scores]
-    #print('The Movie You Should Watched Next Are --')
-    #print('ID ,   Name ,  Average Ratings , Year ')
-    #st.write(movie_id)
     #Varible to print only top 10 movies
     count=0
     for id in range(0,len(movie_id)):
@@ -152,12 +132,8 @@ def recommendation(movie_list,top_n):
             avg_ratings=round(np.mean(rating),2)
             #To print only thoese movies which have an average ratings that is more than 3.5
             if(avg_ratings >3.5):
-                #count+=1
-                #print(f'{movie_id[id]} , {titles[movie_id[id]]} ,{avg_ratings}')
-                result.append(titles[movie_id[id]])#,avg_ratings])
+                result.append(titles[movie_id[id]])
                 result = list(set(result))
             if(len(result) >=top_n):
                     break
-    
-    print('Wait!! i am telling your recommendation')
     return result

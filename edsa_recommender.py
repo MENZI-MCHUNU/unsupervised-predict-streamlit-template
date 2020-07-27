@@ -53,7 +53,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Search for a Movie","About Machine Learning App","Instruction of use","Hybrid Recommender System"]
+    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Search for a Movie","About Machine Learning App","Instruction of use","Hybrid Recommender System","new movie release"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -379,6 +379,12 @@ def main():
         st.markdown('Then when you click the link it will take you to the youtube page for the trailer of that movie.')
         st.image('recommenders/images/page15.png',width = 600)
 
+    if page_selection == "new movie release":
+        st.title("New movie release ")
+        st.video('https://www.youtube.com/watch?v=aK-X2d0lJ_s')
+        st.markdown("Director :	Gina Prince-Bythewood")
+        st.markdown("Starring : Charlize Theron, KiKi Layne, Marwan Kenzari, Luca Marinelli ,Harry Melling ")
+        st.markdown("Plot : Led by a warrior named Andy (Charlize Theron), a covert group of tight-knit mercenaries with a mysterious inability to die have fought to protect the mortal world for centuries. But when the team is recruited to take on an emergency mission and their extraordinary abilities are suddenly exposed, it's up to Andy and Nile (Kiki Layne), the newest soldier to join their ranks, to help the group eliminate the threat of those who seek to replicate and monetize their power by any means necessary.")
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.title("Welcome to the Recommender System Machine Learning App")

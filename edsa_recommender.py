@@ -357,6 +357,7 @@ def main():
                     st.subheader(str(i+1)+'. '+j)
 
     if page_selection == "Instruction of use":
+        st.image('resources/imgs/joker-header.png',width = 600)
         st.title("Instructions")
         st.markdown('When the application opens the first page you will see is the Recommender System Page. Here you will see two algorithms you can choose from.')
         st.image('recommenders/images/page1.png', width = 600)

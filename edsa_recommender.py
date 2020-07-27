@@ -109,6 +109,7 @@ def main():
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
     if page_selection == "Solution Overview":
+        st.image('resources/imgs/Avengers_Header.png',width = 600)
         st.title("Solution Overview")
         st.markdown("")
         st.markdown('On this application you will find three methods to recommend movies to users, namely Content-Based filtering , Collaborative filtering and hybrid approach. A Hybrid approach is a combination of Content-Based filtering and collaborative filtering which the reason it works better than the individual approaches.\

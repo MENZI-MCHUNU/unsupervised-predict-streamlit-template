@@ -402,6 +402,7 @@ def main():
         st.markdown("Plot : After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine-'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.       ")
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
+        st.image('resources/imgs/star-wars-rise-of-skywalker-header.jpg',width = 600)
         st.title("Welcome to the Recommender System Machine Learning App")
         st.subheader('Machine Learning')
         st.markdown('<p>Machine learning (ML) is the study of computer algorithms that improve automatically through experience.It is seen as a subset of artificial intelligence. Machine learning algorithms build a mathematical model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so.Machine learning algorithms are used in a wide variety of applications, such as email filtering and computer vision, where it is difficult or infeasible to develop conventional algorithms to perform the needed tasks. </p>', unsafe_allow_html=True)       

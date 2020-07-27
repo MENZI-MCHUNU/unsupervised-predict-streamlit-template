@@ -212,6 +212,7 @@ def main():
                 st.write(youtube_link(title = row['title']))
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
+        st.image('resources/imgs/philmovieheader.jpg',width = 600)
         st.title("Insights on how people rate movies")       
         if st.checkbox('Show Rating graph'):
             rating_m.groupby('rating')['userId'].count().plot(kind = 'bar', color = 'g',figsize = (8,7))

@@ -409,11 +409,11 @@ def main():
         st.markdown('Directed by : David S. F. Wilson ')
         st.markdown('Starring : Vin Diesel, Eiza González ,Sam Heughan, Toby Kebbell')
         st.markdown("Plot : After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine-'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought. ")
-        st.image('resources/imgs/download.png',width = 100)
+        #st.image('resources/imgs/download.png',width = 100)
         st.markdown('<p><a href="https://www.netflix.com/za/">Netflix</a></p>', unsafe_allow_html=True)	
         st.image('resources/imgs/unnamed.jpg',width = 100)
         st.markdown('<p><a href="https://www.showmax.com/eng/browse?type=movie">Showmax</a></p>', unsafe_allow_html=True)
-        #st.image('resources/imgs/Disney_plus.jpg',width = 100)	
+        st.image('resources/imgs/Disney_plus.jpg',width = 100)	
         st.markdown('<p><a href="https://preview.disneyplus.com/za">Disney plus</a></p>', unsafe_allow_html=True)	
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

@@ -127,7 +127,7 @@ def main():
         st.markdown('The Hybrid Recommender Sytem gives the following RMSE for a subset of movies as when trying to use the whole dataframe gives memoryError')
         st.markdown('<strong>RMSE:</strong> 0.9462',unsafe_allow_html=True)
         st.markdown('The calculation of the RMSE can be found on the notebook in this Repository. The notebook name is Solution Overview.')
-        st.image('resources/imgs/Marvel_head.png')
+        st.image('resources/imgs/Marvel_head.png',width = 800)
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     #Search for a Movie page
@@ -211,6 +211,8 @@ def main():
             for _, row in movie.iterrows():
                 st.write(row['title'])
                 st.write(youtube_link(title = row['title']))
+
+        st.image('resources/imgs/horror.jpg',width = 600)                
     # Building out the EDA page
     if page_selection == "Exploratory Data Analysis":
         st.image('resources/imgs/philmovieheader.jpg',width = 600)
@@ -411,7 +413,7 @@ def main():
         st.markdown('<p><a href="https://www.netflix.com/za/">Netflix</a></p>', unsafe_allow_html=True)	
         st.image('resources/imgs/unnamed.jpg',width = 100)
         st.markdown('<p><a href="https://www.showmax.com/eng/browse?type=movie">Showmax</a></p>', unsafe_allow_html=True)
-        st.image('resources/imgs/Disney_plus.jpg',width = 100)	
+        #st.image('resources/imgs/Disney_plus.jpg',width = 100)	
         st.markdown('<p><a href="https://preview.disneyplus.com/za">Disney plus</a></p>', unsafe_allow_html=True)	
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
@@ -432,6 +434,6 @@ def main():
         st.markdown(' Most recommender systems now use a hybrid approach, combining collaborative filtering, content-based filtering, and other approaches . There is no reason why several different techniques of the same type could not be hybridized. Hybrid approaches can be implemented in several ways: by making content-based and collaborative-based predictions separately and then combining them; by adding content-based capabilities to a collaborative-based approach (and vice versa); or by unifying the approaches into one model .')
         st.markdown(' For more information about building data Apps Please go to :<a href="https://www.streamlit.io/">streamlit site</a></p>', unsafe_allow_html=True)	
         st.markdown('<p> </p>', unsafe_allow_html=True)	
-
+        st.image('resources/imgs/Freaks.jpeg',width = 600)
 if __name__ == '__main__':
     main()

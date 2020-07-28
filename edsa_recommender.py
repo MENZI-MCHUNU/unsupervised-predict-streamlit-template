@@ -388,6 +388,8 @@ def main():
         st.image('recommenders/images/page14.png',width = 600)
         st.markdown('Then when you click the link it will take you to the youtube page for the trailer of that movie.')
         st.image('recommenders/images/page15.png',width = 600)
+        st.markdown('We have Another page where you can see new movie releases!')
+        st.image('recommenders/images/page19.png',width = 600)
 
     if page_selection == "new movie release":
         st.image('resources/imgs/ws_The_Avengers_Silhouettes_1680x1050.jpg',width = 600)

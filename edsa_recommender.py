@@ -53,7 +53,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Hybrid Recommender System","new movie release","Search for a Movie","About Machine Learning App","Instruction of use"]
+    page_options = ["Recommender System","Solution Overview","Exploratory Data Analysis","Hybrid Recommender System","New Movie Release","Search for a Movie","About Machine Learning App","Instruction of use"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -391,7 +391,7 @@ def main():
         st.markdown('We have Another page where you can see new movie releases!')
         st.image('recommenders/images/page19.png',width = 600)
 
-    if page_selection == "new movie release":
+    if page_selection == "New Movie Release":
         st.image('resources/imgs/ws_The_Avengers_Silhouettes_1680x1050.jpg',width = 600)
         st.title("New Movie Release ")
         st.markdown('You will find all new movie releases here . Enjoy!')

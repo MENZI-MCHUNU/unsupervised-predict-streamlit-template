@@ -124,9 +124,10 @@ def main():
         st.markdown('The main approach is to rely on hybrid recommenders, in order to mitigate the disadvantages of one category or model by combining it with another.', unsafe_allow_html=True) 
         st.markdown('We use the RMSE to measure how accurate our model is when recommending movies for users.')     
         st.markdown('Root Mean Square Error (RMSE) is the standard deviation of the residuals (prediction errors). Residuals are a measure of how far from the regression line data points are; RMSE is a measure of how spread out these residuals are. In other words, it tells you how concentrated the data is around the line of best fit.', unsafe_allow_html=True)  
-        st.markdown('The Hybrid Recommender Sytem gives the following RMSE')
+        st.markdown('The Hybrid Recommender Sytem gives the following RMSE for a subset of movies as when trying to use the whole dataframe gives memoryError')
         st.markdown('<strong>RMSE:</strong> 0.9462',unsafe_allow_html=True)
         st.markdown('The calculation of the RMSE can be found on the notebook in this Repository. The notebook name is Solution Overview.')
+        st.image('resources/imgs/Marvel_head.png')
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     #Search for a Movie page
@@ -333,6 +334,7 @@ def main():
             plt.axis('off')
             st.pyplot()
             st.markdown("This is a wordcloud for all the different genres in this Application.")
+        st.image('resources/imgs/genre.jpg',width = 600)
 
     if page_selection == "Hybrid Recommender System":
         st.title('Hybrid Recommender System')
@@ -355,6 +357,8 @@ def main():
                 st.title("We think you'll like:")
                 for i,j in enumerate(top_recommendations):
                     st.subheader(str(i+1)+'. '+j)
+
+        st.image('resources/imgs/horror.jpg',width = 600)                   
 
     if page_selection == "Instruction of use":
         st.image('resources/imgs/joker-header.jpg',width = 600)
@@ -403,8 +407,11 @@ def main():
         st.markdown('Directed by : David S. F. Wilson ')
         st.markdown('Starring : Vin Diesel, Eiza González ,Sam Heughan, Toby Kebbell')
         st.markdown("Plot : After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine-'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought. ")
+        st.image('resources/imgs/download.png',width = 100)
         st.markdown('<p><a href="https://www.netflix.com/za/">Netflix</a></p>', unsafe_allow_html=True)	
-        st.markdown('<p><a href="https://www.showmax.com/eng/browse?type=movie">Showmax</a></p>', unsafe_allow_html=True)	
+        st.image('resources/imgs/unnamed.jpg',width = 100)
+        st.markdown('<p><a href="https://www.showmax.com/eng/browse?type=movie">Showmax</a></p>', unsafe_allow_html=True)
+        st.image('resources/imgs/Disney_plus.jpg',width = 100)	
         st.markdown('<p><a href="https://preview.disneyplus.com/za">Disney plus</a></p>', unsafe_allow_html=True)	
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":

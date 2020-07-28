@@ -187,9 +187,10 @@ def main():
         release_year = st.selectbox('Year', year_of_movie_release)
 
         movie = movie_data[(movie_data.rating == movie_rating)&(movie_data.genres == title)&(movie_data.year == release_year)]
-        if len(movie) !=0:
-            st.write(movie)
-        if len(movie) ==0:
+        df = movie.drop_duplicates(subset = ["title"])
+        if len(df) !=0:
+            st.write(df)
+        if len(df) ==0:
             st.write('We have no movies for that rating!')        
         def youtube_link(title):
     

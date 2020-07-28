@@ -416,7 +416,7 @@ def main():
         st.image('resources/imgs/Disney_plus.jpg',width = 200)	
         st.markdown('<p><a href="https://preview.disneyplus.com/za">Disney plus</a></p>', unsafe_allow_html=True)	
         st.markdown('<p>This application is sponsored by <a href="https://explore-datascience.net/">Explore Data Science Academy</a> </p>', unsafe_allow_html=True)
-        st.image('EDSA_logo.png', width = 800)
+        st.image('resources/imgs/EDSA_logo.png', width = 800)
     # Building out the About Machine Learning App page
     if page_selection == "About Machine Learning App":
         st.image('resources/imgs/star-wars-rise-of-skywalker-header.jpg',width = 600)

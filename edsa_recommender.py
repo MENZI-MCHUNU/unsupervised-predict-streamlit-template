@@ -409,6 +409,7 @@ def main():
         st.markdown('Starring : Vin Diesel, Eiza González ,Sam Heughan, Toby Kebbell')
         st.markdown("Plot : After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine-'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought. ")
         st.markdown("")
+        st.markdown("You can watch new movies in the following sites, Enjoy!")
         st.image('resources/imgs/download1.jpg',width = 200)
         st.markdown('<p><a href="https://www.netflix.com/za/">Netflix</a></p>', unsafe_allow_html=True)	
         st.image('resources/imgs/unnamed.jpg',width = 200)

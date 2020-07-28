@@ -1,5 +1,19 @@
-"""
 
+"""
+    Performs hybrid filtering based upon a list of movies supplied
+       by the app user.
+
+    Parameters
+    ----------
+    movie_list : list (str)
+        Favorite movies chosen by the app user.
+    top_n : type
+        Number of top recommendations to return to the user.
+
+    Returns
+    -------
+    list (str)
+        Titles of the top-n movie recommendations to the user.
 
 """
 import streamlit as st
@@ -7,10 +21,7 @@ import streamlit as st
 import pandas as pd 
 import numpy as np
 import random
-#from playsound import playsound
-#import speech_recognition as sr
 import re 
-#import gtts
 from surprise import Reader, Dataset, SVD
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -130,8 +141,10 @@ def recommendation(movie_list,top_n):
         if((ind != movie_id[id])&(ind1 !=movie_id[id])&(ind2 !=movie_id[id])):
             rating=ratings[ratings['movieId']==movie_id[id]]['rating']
             avg_ratings=round(np.mean(rating),2)
-            #To print only thoese movies which have an average ratings that is more than 3.5
+            #To print only those movies which have an average ratings that is more than 3.5
             if(avg_ratings >3.5):
+                #id_movies=movies_dataset[movies_dataset['title']==titles[movie_id[id]]]['movieId'].iloc[0]
+                #predicted_ratings=round(svd.predict(movie_id[id]).est,2)
                 result.append(titles[movie_id[id]])
                 result = list(set(result))
             if(len(result) >=top_n):

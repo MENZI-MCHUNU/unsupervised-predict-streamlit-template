@@ -208,8 +208,8 @@ def main():
             page = "&page=1"
             URL = base + q + page
             return URL            
-        if len(movie) !=0:           
-            for _, row in movie.iterrows():
+        if len(df) !=0:           
+            for _, row in df.iterrows():
                 st.write(row['title'])
                 st.write(youtube_link(title = row['title']))
 
